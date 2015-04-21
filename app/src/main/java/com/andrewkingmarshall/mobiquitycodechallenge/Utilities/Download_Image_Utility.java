@@ -66,7 +66,8 @@ public class Download_Image_Utility extends AsyncTask<Void, Long, Boolean> {
     /** Used to store any error messages that may arise */
     private String mErrorMsg = "Error";
 
-
+    /** The name of the file to download* */
+    private String mfilename;
 
     private final static String IMAGE_FILE_NAME = "temp.png";
 
@@ -76,11 +77,11 @@ public class Download_Image_Utility extends AsyncTask<Void, Long, Boolean> {
      * @param main_activity_in The Main Activity
      * @param context The Context of the app
      * @param api The Dropbox API
-     * @param dropboxPath The path to where you want the filenames (should be "/")
+     * @param filename_in The path to where you want the filenames (should be "/ + filename")
      * @param view The ImageView we're updating
      */
     public Download_Image_Utility(MainActivity main_activity_in, Context context, DropboxAPI<?> api,
-                                 String dropboxPath, ImageView view) {
+                                 String filename_in, ImageView view) {
 
         main_activity = main_activity_in;
 
@@ -88,7 +89,8 @@ public class Download_Image_Utility extends AsyncTask<Void, Long, Boolean> {
         mContext = context.getApplicationContext();
 
         mApi = api;
-        mPath = dropboxPath;
+        mPath = "/" + filename_in;
+        mfilename = filename_in;
         mView = view;
 
         mDialog = new ProgressDialog(context);
@@ -224,6 +226,9 @@ public class Download_Image_Utility extends AsyncTask<Void, Long, Boolean> {
             main_activity.findViewById(R.id.button_camera).setVisibility(View.GONE);
             main_activity.findViewById(R.id.imageView_globe).setVisibility(View.GONE);
             main_activity.refresh_handler.set_swipe_to_refresh_enabled(false);
+
+            // Display the Lat / Long coordinates if available
+            main_activity.data_utility.set_textViews_if_valid(mfilename);
 
         } else {
             // Couldn't download it, so show an error

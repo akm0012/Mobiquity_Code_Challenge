@@ -146,19 +146,82 @@ public class Location_Utility implements LocationListener, GpsStatus.Listener{
 
 
     /**
+     * Gets the live latitude if possible.
+     *
+     * If not, uses last known location.
+     *
+     * @return The latitude if available or 200 (invalid) if not.
+     */
+    public double get_latitude() {
+
+        // Create temp variables
+        double temp_lat = 200;
+
+        // Used to check if we are receiving live location data yet
+        if (longitude != 0 || latitude != 0) {
+
+            temp_lat = this.latitude;
+
+        }
+
+        else {
+
+            Location location = location_manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (location.getLatitude() != 0) {
+                temp_lat = location.getLatitude();
+            }
+
+        }
+
+        return temp_lat;
+
+    }
+
+    /**
+     * Gets the live longitude if possible.
+     *
+     * If not, uses last known location.
+     *
+     * @return The longitude if available or 200 (invalid) if not.
+     */
+    public double get_longitude() {
+
+        // Create temp variables
+        double temp_lot = 200;
+
+        // Used to check if we are receiving live location data yet
+        if (longitude != 0 || latitude != 0) {
+
+            temp_lot = this.longitude;
+
+        }
+
+        else {
+
+            Location location = location_manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (location.getLongitude() != 0) {
+                temp_lot = location.getLongitude();
+            }
+
+        }
+
+        return temp_lot;
+    }
+
+    /**
      * Gets the live longitude and latitude if possible.
      *
      * If not, uses last known location.
      *
      * Uses this information to find what city you are in.
      *
-     * @return The city you are in.  Or "N/A" if not available.
+     * @return The city you are in.  Or "n/a" if not available.
      */
     public String get_current_city() {
 
         // Create temp variables
-        double temp_lat = 0;
-        double temp_long = 0;
+        double temp_lat = 200;
+        double temp_long = 200;
 
         // Used to check if we are receiving live location data yet
         if (longitude != 0 || latitude != 0) {
@@ -171,8 +234,15 @@ public class Location_Utility implements LocationListener, GpsStatus.Listener{
         else {
 
             Location location = location_manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            temp_lat = location.getLatitude();
-            temp_long = location.getLongitude();
+            if (location.getLongitude() != 0 || location.getLatitude() != 0) {
+                temp_lat = location.getLatitude();
+                temp_long = location.getLongitude();
+            }
+
+            else {
+                return "n/a";
+            }
+
 
         }
 

@@ -64,6 +64,12 @@ public class Upload_Image_Utility extends AsyncTask<Void, Long, Boolean> {
     MainActivity main_activity;
     private Context mContext;
 
+    /** The Latitude of the picture we are uploading */
+    private double latitude;
+
+    /** The Longitude of the picture we are uploading */
+    private double longitude;
+
 
     /**
      * Creates an Upload Image Utility.
@@ -73,9 +79,11 @@ public class Upload_Image_Utility extends AsyncTask<Void, Long, Boolean> {
      * @param api The Dropbox API
      * @param dropboxPath The path to where you want the filenames (should be "/")
      * @param file The file to upload
+     * @param latitude_in The Latitude of the picture we are uploading
+     * @param longitude_in The Longitude of the picture we are uploading
      */
     public Upload_Image_Utility(MainActivity main_activity_in, Context context, DropboxAPI<?> api, String dropboxPath,
-                         File file) {
+                         File file, double latitude_in, double longitude_in) {
         // We set the context this way so we don't accidentally leak activities
         mContext = context.getApplicationContext();
 
@@ -86,18 +94,8 @@ public class Upload_Image_Utility extends AsyncTask<Void, Long, Boolean> {
         mPath = dropboxPath;
         mFile = file;
 
-        //TODO: Cleanup
-//        Log.d(tag, "Old File Name: " + mFile.getName());
-
-//        File new_path = new File(mFile.getAbsolutePath());
-
-//        Log.d(tag, "new_path File Name: " + new_path.getName());
-
-//        boolean name_change = mFile.renameTo(new_path);
-
-//        Log.d(tag, "File Name Changed: " + name_change);
-
-//        Log.d(tag, "New File Name: " + mFile.getName());
+        this.latitude = latitude_in;
+        this.longitude = longitude_in;
 
         mDialog = new ProgressDialog(context);
         mDialog.setMax(100);
@@ -225,6 +223,10 @@ public class Upload_Image_Utility extends AsyncTask<Void, Long, Boolean> {
         mDialog.dismiss();
         if (result) {
             showToast("Image successfully uploaded");
+
+            // Add to our data utility
+            main_activity.data_utility.put(mFile.getName(), latitude, longitude);
+
             main_activity.refresh_handler.force_refresh();
 
         } else {

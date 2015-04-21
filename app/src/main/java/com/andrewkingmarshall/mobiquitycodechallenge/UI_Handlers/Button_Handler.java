@@ -146,7 +146,6 @@ public class Button_Handler implements View.OnClickListener {
                     newPicFile = df.format(date) + ".jpg";
                 }
 
-//                String newPicFile = df.format(date) + ".jpg";
                 String outPath = new File(Environment.getExternalStorageDirectory(), newPicFile).getPath();
                 File outFile = new File(outPath);
 
@@ -174,6 +173,8 @@ public class Button_Handler implements View.OnClickListener {
         main_activity.findViewById(R.id.button_back).setVisibility(View.GONE);
         main_activity.findViewById(R.id.button_camera).setVisibility(View.VISIBLE);
         main_activity.findViewById(R.id.imageView_globe).setVisibility(View.VISIBLE);
+        main_activity.findViewById(R.id.textView_latitude).setVisibility(View.GONE);
+        main_activity.findViewById(R.id.textView_longitude).setVisibility(View.GONE);
         main_activity.refresh_handler.set_swipe_to_refresh_enabled(true);
     }
 
@@ -208,7 +209,8 @@ public class Button_Handler implements View.OnClickListener {
                     Log.d(tag, "" + ReadExif(file.getAbsolutePath()));
 
                     Upload_Image_Utility upload = new Upload_Image_Utility(main_activity, main_activity_context,
-                            main_activity.get_mApi(), "/", file);
+                            main_activity.get_mApi(), "/", file, main_activity.location_utility.get_latitude(),
+                            main_activity.location_utility.get_longitude());
                     upload.execute();
                 }
 
@@ -225,6 +227,16 @@ public class Button_Handler implements View.OnClickListener {
         }
     }
 
+    /**
+     * This is not used, but can be used to get the Exif .jpeg data.
+     *
+     * This didn't work once the picture was uploaded then downloaded from Dropbox.
+     *
+     * Source: http://android-coding.blogspot.com/2011/10/read-exif-of-jpg-file-using.html
+     *
+     * @param file The .jpeg file with the Exif data
+     * @return A String with all the Exif data.
+     */
     public String ReadExif(String file) {
         String exif="Exif: " + file;
         try {

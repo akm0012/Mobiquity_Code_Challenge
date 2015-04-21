@@ -58,6 +58,9 @@ public class Download_File_List_Utility extends AsyncTask<Void, Long, Boolean> {
     /** The Adapter that will be used to populate our ListView. */
     ArrayAdapter<String> arrayAdapter;
 
+    /** The array list that holds all the file names */
+    ArrayList<String> filenames;
+
     /**
      * Creates a Download File List Utility.
      *
@@ -88,7 +91,7 @@ public class Download_File_List_Utility extends AsyncTask<Void, Long, Boolean> {
         try {
 
             // An ArrayList that holds all the filenames
-            ArrayList<String> filenames = new ArrayList<String>();
+            filenames = new ArrayList<String>();
 
             // Get the metadata for a directory
             DropboxAPI.Entry dirent = mApi.metadata(mPath, 1000, null, true, null);
@@ -192,6 +195,10 @@ public class Download_File_List_Utility extends AsyncTask<Void, Long, Boolean> {
 
             // Set the Adapter to the ListView.
             listView_dropbox_files.setAdapter(arrayAdapter);
+
+            main_activity.data_utility.clean_data(filenames);
+
+            main_activity.data_utility.display_data_in_log();
 
         } else {
             // Couldn't download file list, so show an error

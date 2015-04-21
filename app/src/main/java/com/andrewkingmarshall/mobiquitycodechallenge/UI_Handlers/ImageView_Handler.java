@@ -65,7 +65,7 @@ public class ImageView_Handler {
 
         Log.i(tag, "Attempting to get file from Dropbox: " + filename_in);
         Download_Image_Utility download_image = new Download_Image_Utility(main_activity, main_activity_context,
-                main_activity.get_mApi(), "/" + filename_in, image_view_main_canvas);
+                main_activity.get_mApi(), filename_in, image_view_main_canvas);
         download_image.execute();
     }
 
