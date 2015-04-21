@@ -1,18 +1,24 @@
 package com.andrewkingmarshall.mobiquitycodechallenge;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.andrewkingmarshall.mobiquitycodechallenge.UI_Handlers.Button_Handler;
+import com.andrewkingmarshall.mobiquitycodechallenge.UI_Handlers.ImageView_Handler;
 import com.andrewkingmarshall.mobiquitycodechallenge.UI_Handlers.ListView_Handler;
 import com.andrewkingmarshall.mobiquitycodechallenge.UI_Handlers.Swipe_to_Refresh_Handler;
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
+
+import java.io.File;
 
 /**
  * MainActivity.java
@@ -51,6 +57,9 @@ public class MainActivity extends ActionBarActivity {
     /** Used to refresh the List of Files */
     public Swipe_to_Refresh_Handler refresh_handler;
 
+    /** Used to manage the ImageViews displayed */
+    public ImageView_Handler imageView_handler;
+
 
     /** Used to indicate if we are linked to a Dropbox account */
     private boolean logged_in;
@@ -74,6 +83,9 @@ public class MainActivity extends ActionBarActivity {
 
         // Set up the refresh handler
         refresh_handler = new Swipe_to_Refresh_Handler(this, this);
+
+        // Set up the ImageView handler
+        imageView_handler = new ImageView_Handler(this, this);
 
         // Set the UI according to if we are logged in or not.
         set_logged_in(mApi.getSession().isLinked());
@@ -105,31 +117,20 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    /**
+     * This is what gets called on finishing a media piece to import.
+     *
+     * @param requestCode The integer request code originally supplied to startActivityForResult(),
+     *                    allowing you to identify who this result came from.
+     * @param resultCode The integer result code returned by the child activity through its setResult().
+     * @param data An Intent, which can return result data to the caller (various data can be attached to Intent "extras").
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-
-    public void onPause() {
-        super.onPause();
-        Log.i(tag, "MainActivity.onPause()");
-    }
-
-    public void onStart() {
-        super.onStart();
-        Log.i(tag, "MainActivity.onStart()");
-    }
-
-    public void onRestart() {
-        super.onRestart();
-        Log.i(tag, "MainActivity.onRestart()");
-    }
-
-    public void onStop() {
-        super.onStop();
-        Log.i(tag, "MainActivity.onStop()");
-    }
-
-    public void onDestroy() {
-        super.onDestroy();
-        Log.i(tag, "MainActivity.onDestroy()");
+        if (requestCode == Button_Handler.NEW_PICTURE) {
+            button_handler.handle_new_picture(requestCode, resultCode, data);
+        }
     }
 
     /**
@@ -268,29 +269,28 @@ public class MainActivity extends ActionBarActivity {
         return logged_in;
     }
 
+    public void onPause() {
+        super.onPause();
+        Log.i(tag, "MainActivity.onPause()");
+    }
 
+    public void onStart() {
+        super.onStart();
+        Log.i(tag, "MainActivity.onStart()");
+    }
+
+    public void onRestart() {
+        super.onRestart();
+        Log.i(tag, "MainActivity.onRestart()");
+    }
+
+    public void onStop() {
+        super.onStop();
+        Log.i(tag, "MainActivity.onStop()");
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i(tag, "MainActivity.onDestroy()");
+    }
 }
-
-/* Do not need any overflow menus yet. */
-
-//@Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }

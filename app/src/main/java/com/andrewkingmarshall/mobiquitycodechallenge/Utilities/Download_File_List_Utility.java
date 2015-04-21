@@ -31,7 +31,7 @@ import java.util.ArrayList;
  * Revision By     :: N/A
  * Last Revised On :: N/A
  *
- * This class handles the downloading from DropBox
+ * This class handles the retrieving of the list of files on Dropbox
  *
  */
 public class Download_File_List_Utility extends AsyncTask<Void, Long, Boolean> {
