@@ -30,6 +30,7 @@ public class ImageView_Handler {
 
     /** MainActivity ImageViews */
     private ImageView image_view_main_canvas;
+    private ImageView imageView_globe;
 
     /**
      * This constructor is used when we are handling ImageViews from the MainActivity.
@@ -51,7 +52,8 @@ public class ImageView_Handler {
     private void set_up_imageViews() {
 
         // Get handles to the buttons
-       image_view_main_canvas = (ImageView) main_activity.findViewById(R.id.imageView_main_canvas);
+        image_view_main_canvas = (ImageView) main_activity.findViewById(R.id.imageView_main_canvas);
+        imageView_globe = (ImageView) main_activity.findViewById(R.id.imageView_globe);
     }
 
     /**
@@ -65,5 +67,29 @@ public class ImageView_Handler {
         Download_Image_Utility download_image = new Download_Image_Utility(main_activity, main_activity_context,
                 main_activity.get_mApi(), "/" + filename_in, image_view_main_canvas);
         download_image.execute();
+    }
+
+    /**
+     * Changes the globe image to green.
+     */
+    public void change_globe_green()
+    {
+        imageView_globe.setImageResource(R.drawable.green_globe);
+    }
+
+    /**
+     * Changes the globe image to red.
+     */
+    public void change_globe_red()
+    {
+        imageView_globe.setImageResource(R.drawable.red_globe);
+    }
+
+    /**
+     * Changes the globe image to grey.
+     */
+    public void change_globe_grey()
+    {
+        imageView_globe.setImageResource(R.drawable.grey_globe);
     }
 }

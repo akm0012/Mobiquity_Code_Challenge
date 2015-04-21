@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -219,6 +220,7 @@ public class Download_Image_Utility extends AsyncTask<Void, Long, Boolean> {
             main_activity.findViewById(R.id.imageView_main_canvas).setVisibility(View.VISIBLE);
             main_activity.findViewById(R.id.button_back).setVisibility(View.VISIBLE);
             main_activity.findViewById(R.id.button_camera).setVisibility(View.GONE);
+            main_activity.findViewById(R.id.imageView_globe).setVisibility(View.GONE);
             main_activity.refresh_handler.set_swipe_to_refresh_enabled(false);
 
         } else {

@@ -4,6 +4,11 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -16,9 +21,11 @@ import com.andrewkingmarshall.mobiquitycodechallenge.R;
 import com.andrewkingmarshall.mobiquitycodechallenge.Utilities.Upload_Image_Utility;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -125,7 +132,21 @@ public class Button_Handler implements View.OnClickListener {
                 Date date = new Date();
                 DateFormat df = new SimpleDateFormat("yyyy-MM-dd-kk-mm-ss", Locale.US);
 
-                String newPicFile = df.format(date) + ".jpg";
+                String current_city = main_activity.location_utility.get_current_city();
+
+                String newPicFile;
+
+                if (!current_city.equalsIgnoreCase("n/a")) {
+
+                    newPicFile = current_city + "_" + df.format(date) + ".jpg";
+
+                }
+
+                else {
+                    newPicFile = df.format(date) + ".jpg";
+                }
+
+//                String newPicFile = df.format(date) + ".jpg";
                 String outPath = new File(Environment.getExternalStorageDirectory(), newPicFile).getPath();
                 File outFile = new File(outPath);
 
@@ -152,6 +173,7 @@ public class Button_Handler implements View.OnClickListener {
         main_activity.findViewById(R.id.imageView_main_canvas).setVisibility(View.GONE);
         main_activity.findViewById(R.id.button_back).setVisibility(View.GONE);
         main_activity.findViewById(R.id.button_camera).setVisibility(View.VISIBLE);
+        main_activity.findViewById(R.id.imageView_globe).setVisibility(View.VISIBLE);
         main_activity.refresh_handler.set_swipe_to_refresh_enabled(true);
     }
 
@@ -172,21 +194,65 @@ public class Button_Handler implements View.OnClickListener {
                 if (data != null) {
                     uri = data.getData();
                 }
+
+                File file = null;
+
                 if (uri == null && mCameraFileName != null) {
                     uri = Uri.fromFile(new File(mCameraFileName));
+                    file = new File(mCameraFileName);
                 }
-                File file = new File(mCameraFileName);
 
-                if (uri != null) {
+                if (uri != null && file != null) {
+
+                    // TODO - Testing
+                    Log.d(tag, "" + ReadExif(file.getAbsolutePath()));
+
                     Upload_Image_Utility upload = new Upload_Image_Utility(main_activity, main_activity_context,
                             main_activity.get_mApi(), "/", file);
                     upload.execute();
                 }
-            } else {
+
+                else {
+                    main_activity.showToast("Error. Try Again.");
+                }
+
+            }
+
+            else {
                 Log.e(tag, "Unknown Activity Result from mediaImport: "
                         + resultCode);
             }
         }
+    }
+
+    public String ReadExif(String file) {
+        String exif="Exif: " + file;
+        try {
+            ExifInterface exifInterface = new ExifInterface(file);
+
+            exif += "\nIMAGE_LENGTH: " + exifInterface.getAttribute(ExifInterface.TAG_IMAGE_LENGTH);
+            exif += "\nIMAGE_WIDTH: " + exifInterface.getAttribute(ExifInterface.TAG_IMAGE_WIDTH);
+            exif += "\n DATETIME: " + exifInterface.getAttribute(ExifInterface.TAG_DATETIME);
+            exif += "\n TAG_MAKE: " + exifInterface.getAttribute(ExifInterface.TAG_MAKE);
+            exif += "\n TAG_MODEL: " + exifInterface.getAttribute(ExifInterface.TAG_MODEL);
+            exif += "\n TAG_ORIENTATION: " + exifInterface.getAttribute(ExifInterface.TAG_ORIENTATION);
+            exif += "\n TAG_WHITE_BALANCE: " + exifInterface.getAttribute(ExifInterface.TAG_WHITE_BALANCE);
+            exif += "\n TAG_FOCAL_LENGTH: " + exifInterface.getAttribute(ExifInterface.TAG_FOCAL_LENGTH);
+            exif += "\n TAG_FLASH: " + exifInterface.getAttribute(ExifInterface.TAG_FLASH);
+            exif += "\nGPS related:";
+            exif += "\n TAG_GPS_DATESTAMP: " + exifInterface.getAttribute(ExifInterface.TAG_GPS_DATESTAMP);
+            exif += "\n TAG_GPS_TIMESTAMP: " + exifInterface.getAttribute(ExifInterface.TAG_GPS_TIMESTAMP);
+            exif += "\n TAG_GPS_LATITUDE: " + exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
+            exif += "\n TAG_GPS_LATITUDE_REF: " + exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF);
+            exif += "\n TAG_GPS_LONGITUDE: " + exifInterface.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
+            exif += "\n TAG_GPS_LONGITUDE_REF: " + exifInterface.getAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF);
+            exif += "\n TAG_GPS_PROCESSING_METHOD: " + exifInterface.getAttribute(ExifInterface.TAG_GPS_PROCESSING_METHOD);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return exif;
     }
 
     /** Sets the text of a button.

@@ -86,6 +86,19 @@ public class Upload_Image_Utility extends AsyncTask<Void, Long, Boolean> {
         mPath = dropboxPath;
         mFile = file;
 
+        //TODO: Cleanup
+//        Log.d(tag, "Old File Name: " + mFile.getName());
+
+//        File new_path = new File(mFile.getAbsolutePath());
+
+//        Log.d(tag, "new_path File Name: " + new_path.getName());
+
+//        boolean name_change = mFile.renameTo(new_path);
+
+//        Log.d(tag, "File Name Changed: " + name_change);
+
+//        Log.d(tag, "New File Name: " + mFile.getName());
+
         mDialog = new ProgressDialog(context);
         mDialog.setMax(100);
         // Makes it so you have to push the cancel button to stop the upload

@@ -12,6 +12,7 @@ import com.andrewkingmarshall.mobiquitycodechallenge.UI_Handlers.Button_Handler;
 import com.andrewkingmarshall.mobiquitycodechallenge.UI_Handlers.ImageView_Handler;
 import com.andrewkingmarshall.mobiquitycodechallenge.UI_Handlers.ListView_Handler;
 import com.andrewkingmarshall.mobiquitycodechallenge.UI_Handlers.Swipe_to_Refresh_Handler;
+import com.andrewkingmarshall.mobiquitycodechallenge.Utilities.Location_Utility;
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.session.AccessTokenPair;
@@ -58,6 +59,9 @@ public class MainActivity extends ActionBarActivity {
     /** Used to manage the ImageViews displayed */
     public ImageView_Handler imageView_handler;
 
+    /** Used for location data */
+    public Location_Utility location_utility;
+
     /** Used to indicate if we are linked to a Dropbox account */
     private boolean logged_in;
 
@@ -83,6 +87,9 @@ public class MainActivity extends ActionBarActivity {
 
         // Set up the ImageView handler
         imageView_handler = new ImageView_Handler(this, this);
+
+        // Set up the Location Utility
+        location_utility = new Location_Utility(this, this);
 
         // Set the UI according to if we are logged in or not.
         set_logged_in(mApi.getSession().isLinked());
