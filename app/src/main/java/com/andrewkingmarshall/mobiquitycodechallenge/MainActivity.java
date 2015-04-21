@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.andrewkingmarshall.mobiquitycodechallenge.UI_Handlers.Button_Handler;
+import com.andrewkingmarshall.mobiquitycodechallenge.UI_Handlers.ListView_Handler;
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.session.AccessTokenPair;
@@ -32,7 +33,7 @@ public class MainActivity extends ActionBarActivity {
     private static final String APP_KEY = "kxkc3c8pwmimf2b";
     private static final String APP_SECRET = "qhv4hace8y2r28v";
 
-    /** Used for Dropbox Authentication */
+    /** Used for Dropbox Access */
     private DropboxAPI<AndroidAuthSession> mApi;
 
     /** Shared Preferences constants */
@@ -42,6 +43,9 @@ public class MainActivity extends ActionBarActivity {
 
     /** Used to manage all button pushes */
     public Button_Handler button_handler;
+
+    /** Used to manage the ListView */
+    public ListView_Handler listView_handler;
 
 
     /** Used to indicate if we are linked to a Dropbox account */
@@ -61,10 +65,11 @@ public class MainActivity extends ActionBarActivity {
         // Set up the button handler (creates button listeners)
         button_handler = new Button_Handler(this, this);
 
+        // Set up the ListView handler
+        listView_handler = new ListView_Handler(this, this);
+
         //TODO: SetLoggedIn - mApi.getSession().isLinked() - indicates if we are logged in. Alter UI Accordingly
     }
-
-
 
     public void onResume() {
         super.onResume();
@@ -83,6 +88,7 @@ public class MainActivity extends ActionBarActivity {
                 // Store it locally in our app for later use
                 storeAuth(session);
                 //TODO: setLoggedIn(true);
+
                 logged_in = true;
             } catch (IllegalStateException e) {
                 showToast("Couldn't authenticate with Dropbox:" + e.getLocalizedMessage());
@@ -90,6 +96,8 @@ public class MainActivity extends ActionBarActivity {
             }
         }
     }
+
+
 
     public void onPause() {
         super.onPause();

@@ -31,6 +31,7 @@ public class Button_Handler implements View.OnClickListener {
 
     /** MainActivity Buttons */
     private Button button_dropbox_link;
+    private Button button_refresh;
 
     /**
      * This constructor is used when we are handling button pushed from the MainActivity.
@@ -65,9 +66,11 @@ public class Button_Handler implements View.OnClickListener {
 
         // Get handles to the buttons
         button_dropbox_link = (Button) main_activity.findViewById(R.id.button_dropbox_link);
+        button_refresh = (Button) main_activity.findViewById(R.id.button_refresh);
 
         // Add the button listeners
         button_dropbox_link.setOnClickListener(this);
+        button_refresh.setOnClickListener(this);
 
     }
 
@@ -89,6 +92,16 @@ public class Button_Handler implements View.OnClickListener {
 
                 else {
                     main_activity.get_mApi().getSession().startOAuth2Authentication(main_activity_context);
+                }
+
+
+                break;
+
+            case R.id.button_refresh:
+                Log.i(tag, "Refresh Button Pushed");
+
+                if (main_activity.is_logged_in()) {
+                    main_activity.listView_handler.refresh_listView();
                 }
 
 
