@@ -28,8 +28,8 @@ import java.io.IOException;
  *
  * @author         :: Andrew K Marshall
  * Created On      :: 4/20/15
- * Revision By     :: N/A
- * Last Revised On :: N/A
+ * Revision By     :: Andrew K Marshall
+ * Last Revised On :: 4/21/15
  *
  * This class handles downloading image files from Dropbox.
  *
@@ -69,13 +69,13 @@ public class Download_Image_Utility extends AsyncTask<Void, Long, Boolean> {
     private final static String IMAGE_FILE_NAME = "temp.png";
 
     /**
-     * //TODO: Fill this in later
+     * Creates a Download Image Utility
      *
-     * @param main_activity_in
-     * @param context
-     * @param api
-     * @param dropboxPath
-     * @param view
+     * @param main_activity_in The Main Activity
+     * @param context The Context of the app
+     * @param api The Dropbox API
+     * @param dropboxPath The path to where you want the filenames (should be "/")
+     * @param view The ImageView we're updating
      */
     public Download_Image_Utility(MainActivity main_activity_in, Context context, DropboxAPI<?> api,
                                  String dropboxPath, ImageView view) {
@@ -110,6 +110,11 @@ public class Download_Image_Utility extends AsyncTask<Void, Long, Boolean> {
         mDialog.show();
     }
 
+    /**
+     * The background task that occurs on a separate thread.
+     *
+     * Do not access UI Thread here.
+     */
     @Override
     protected Boolean doInBackground(Void... params) {
         try {
@@ -125,8 +130,7 @@ public class Download_Image_Utility extends AsyncTask<Void, Long, Boolean> {
                 return false;
             }
 
-            // This downloads a smaller, thumbnail version of the file.  The
-            // API to download the actual file is roughly the same.
+            // This downloads a smaller, thumbnail version of the file.
             mApi.getThumbnail(mPath, mFos, DropboxAPI.ThumbSize.BESTFIT_960x640,
                     DropboxAPI.ThumbFormat.JPEG, null);
             if (mCanceled) {
@@ -139,6 +143,7 @@ public class Download_Image_Utility extends AsyncTask<Void, Long, Boolean> {
 
         } catch (DropboxUnlinkedException e) {
             // The AuthSession wasn't properly authenticated or user unlinked.
+            mErrorMsg = "Not authenticated";
         } catch (DropboxPartialFileException e) {
             // We canceled the operation
             mErrorMsg = "Download canceled";
@@ -150,19 +155,27 @@ public class Download_Image_Utility extends AsyncTask<Void, Long, Boolean> {
             } else if (e.error == DropboxServerException._401_UNAUTHORIZED) {
                 // Unauthorized, so we should unlink them.  You may want to
                 // automatically log the user out in this case.
+                main_activity.logOut();
+                mErrorMsg = "Unauthorized! Logging Off";
             } else if (e.error == DropboxServerException._403_FORBIDDEN) {
                 // Not allowed to access this
+                mErrorMsg = "Not allowed to access this";
             } else if (e.error == DropboxServerException._404_NOT_FOUND) {
                 // path not found (or if it was the thumbnail, can't be
                 // thumbnailed)
+                mErrorMsg = "Path not found";
             } else if (e.error == DropboxServerException._406_NOT_ACCEPTABLE) {
                 // too many entries to return
+                mErrorMsg = "Too many entries";
             } else if (e.error == DropboxServerException._415_UNSUPPORTED_MEDIA) {
                 // can't be thumbnailed
+                mErrorMsg = "Unsupported media";
             } else if (e.error == DropboxServerException._507_INSUFFICIENT_STORAGE) {
                 // user is over quota
+                mErrorMsg = "Not enough storage";
             } else {
                 // Something else
+                mErrorMsg = "Something went wrong, try again";
             }
             // This gets the Dropbox error, translated into the user's language
             mErrorMsg = e.body.userError;
@@ -188,6 +201,11 @@ public class Download_Image_Utility extends AsyncTask<Void, Long, Boolean> {
         mDialog.setProgress(percent);
     }
 
+    /**
+     * This is called when the task is completed.
+     *
+     * Only edit UI stuff here.
+     */
     @Override
     protected void onPostExecute(Boolean result) {
         mDialog.dismiss();
@@ -209,6 +227,11 @@ public class Download_Image_Utility extends AsyncTask<Void, Long, Boolean> {
         }
     }
 
+    /**
+     * Create a Toast and displays it.
+     *
+     * @param msg The message of the toast.
+     */
     private void showToast(String msg) {
         Toast error = Toast.makeText(mContext, msg, Toast.LENGTH_LONG);
         error.show();

@@ -1,9 +1,7 @@
 package com.andrewkingmarshall.mobiquitycodechallenge.UI_Handlers;
 
 import android.content.Context;
-import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.View;
 
 import com.andrewkingmarshall.mobiquitycodechallenge.MainActivity;
 import com.andrewkingmarshall.mobiquitycodechallenge.R;
@@ -13,8 +11,8 @@ import com.andrewkingmarshall.mobiquitycodechallenge.R;
  *
  * @author         :: Andrew K Marshall
  * Created On      :: 4/20/15
- * Revision By     :: 4/21/15
- * Last Revised On :: Andrew K Marshall
+ * Revision By     :: Andrew K Marshall
+ * Last Revised On :: 4/21/15
  *
  * This class hanldes the Swipe to Refresh widget.
  *
@@ -64,13 +62,12 @@ public class Swipe_to_Refresh_Handler implements SwipeRefreshLayout.OnRefreshLis
     }
 
     /**
-     * Called when you pull down to refresh the ListView
+     * Called when you pull down to refresh the ListView.
      */
     public void onRefresh() {
 
         // Refresh the ListView
         main_activity.listView_handler.refresh_listView();
-
     }
 
     /**
@@ -90,6 +87,9 @@ public class Swipe_to_Refresh_Handler implements SwipeRefreshLayout.OnRefreshLis
         swipe_refresh_layout.setEnabled(enabled);
     }
 
+    /**
+     * Forces the widget to refresh.
+     */
     public void force_refresh() {
         swipe_refresh_layout.setRefreshing(true);
         // Refresh the ListView

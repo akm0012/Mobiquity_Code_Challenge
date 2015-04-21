@@ -58,7 +58,6 @@ public class MainActivity extends ActionBarActivity {
     /** Used to manage the ImageViews displayed */
     public ImageView_Handler imageView_handler;
 
-
     /** Used to indicate if we are linked to a Dropbox account */
     private boolean logged_in;
 
@@ -228,8 +227,6 @@ public class MainActivity extends ActionBarActivity {
         Toast toast = Toast.makeText(this, msg, Toast.LENGTH_LONG);
         toast.show();
     }
-
-    // ----- Getters and Setters -----
 
     /**
      * Sets the boolean indicating if we are logged in.

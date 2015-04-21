@@ -66,17 +66,6 @@ public class Button_Handler implements View.OnClickListener {
     }
 
     /**
-     * This is currently unused, but could be used to handle button pushes from another class.
-     *
-     * @param activity_in The calling Activity
-     * @param context_in The calling Activity's context
-     */
-    public Button_Handler (Activity activity_in,  Context context_in) {
-
-        // Unused right now.
-    }
-
-    /**
      * This will find the buttons by their ID and add a listener to them.
      */
     private void set_up_buttons() {

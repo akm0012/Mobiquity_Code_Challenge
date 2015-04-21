@@ -28,10 +28,10 @@ import java.util.ArrayList;
  *
  * @author         :: Andrew K Marshall
  * Created On      :: 4/20/15
- * Revision By     :: N/A
- * Last Revised On :: N/A
+ * Revision By     :: Andrew K Marshall
+ * Last Revised On :: 4/21/15
  *
- * This class handles the retrieving of the list of files on Dropbox
+ * This class handles the retrieving of the list of filenames on Dropbox.
  *
  */
 public class Download_File_List_Utility extends AsyncTask<Void, Long, Boolean> {
@@ -59,24 +59,30 @@ public class Download_File_List_Utility extends AsyncTask<Void, Long, Boolean> {
     ArrayAdapter<String> arrayAdapter;
 
     /**
-     * //TODO: Fill this in
+     * Creates a Download File List Utility.
      *
-     * @param context
-     * @param api
-     * @param dropboxPath
-     * @param listView_in
+     * @param main_activity_in The Main Activity
+     * @param context The Context of the app
+     * @param api The Dropbox API
+     * @param dropboxPath The path to where you want the filenames (should be "/")
+     * @param listView_in The listView we're updating
      */
-    public Download_File_List_Utility(MainActivity main_activiry_in, Context context, DropboxAPI<?> api,
+    public Download_File_List_Utility(MainActivity main_activity_in, Context context, DropboxAPI<?> api,
                                       String dropboxPath, ListView listView_in) {
         // We set the context this way so we don't accidentally leak activities
         main_activity_context = context.getApplicationContext();
-        main_activity = main_activiry_in;
+        main_activity = main_activity_in;
 
         mApi = api;
         mPath = dropboxPath;
         listView_dropbox_files = listView_in;
     }
 
+    /**
+     * The background task that occurs on a separate thread.
+     *
+     * Do not access UI Thread here.
+     */
     @Override
     protected Boolean doInBackground(Void... params) {
         try {
@@ -119,6 +125,7 @@ public class Download_File_List_Utility extends AsyncTask<Void, Long, Boolean> {
 
         } catch (DropboxUnlinkedException e) {
             // The AuthSession wasn't properly authenticated or user unlinked.
+            mErrorMsg = "Not authenticated";
         } catch (DropboxPartialFileException e) {
             // We canceled the operation
             mErrorMsg = "Download canceled";
@@ -130,19 +137,27 @@ public class Download_File_List_Utility extends AsyncTask<Void, Long, Boolean> {
             } else if (e.error == DropboxServerException._401_UNAUTHORIZED) {
                 // Unauthorized, so we should unlink them.  You may want to
                 // automatically log the user out in this case.
+                main_activity.logOut();
+                mErrorMsg = "Unauthorized! Logging Off";
             } else if (e.error == DropboxServerException._403_FORBIDDEN) {
                 // Not allowed to access this
+                mErrorMsg = "Not allowed to access this";
             } else if (e.error == DropboxServerException._404_NOT_FOUND) {
                 // path not found (or if it was the thumbnail, can't be
                 // thumbnailed)
+                mErrorMsg = "Path not found";
             } else if (e.error == DropboxServerException._406_NOT_ACCEPTABLE) {
                 // too many entries to return
+                mErrorMsg = "Too many entries";
             } else if (e.error == DropboxServerException._415_UNSUPPORTED_MEDIA) {
                 // can't be thumbnailed
+                mErrorMsg = "Unsupported media";
             } else if (e.error == DropboxServerException._507_INSUFFICIENT_STORAGE) {
                 // user is over quota
+                mErrorMsg = "Not enough storage";
             } else {
                 // Something else
+                mErrorMsg = "Something went wrong, try again";
             }
             // This gets the Dropbox error, translated into the user's language
             mErrorMsg = e.body.userError;
@@ -166,9 +181,13 @@ public class Download_File_List_Utility extends AsyncTask<Void, Long, Boolean> {
     protected void onProgressUpdate(Long... progress) {
     }
 
+    /**
+     * This is called when the task is completed.
+     *
+     * Only edit UI stuff here.
+     */
     @Override
     protected void onPostExecute(Boolean result) {
-//        mDialog.dismiss();
         if (result) {
 
             // Set the Adapter to the ListView.

@@ -1,11 +1,9 @@
 package com.andrewkingmarshall.mobiquitycodechallenge.UI_Handlers;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,8 +16,8 @@ import com.andrewkingmarshall.mobiquitycodechallenge.Utilities.Download_File_Lis
  *
  * @author         :: Andrew K Marshall
  * Created On      :: 4/20/15
- * Revision By     :: N/A
- * Last Revised On :: N/A
+ * Revision By     :: Andrew K Marshall
+ * Last Revised On :: 4/21/15
  *
  * This class hanldes the ListView.
  *
@@ -37,7 +35,7 @@ public class ListView_Handler implements AdapterView.OnItemClickListener {
     private ListView listView_dropbox_files;
 
     /**
-     * This constructor is used when we are handling button pushed from the MainActivity.
+     * This constructor is used when we are handling ListViews from the MainActivity.
      *
      * @param activity_in The MainActivity
      * @param context_in The MainActivity context
@@ -52,18 +50,7 @@ public class ListView_Handler implements AdapterView.OnItemClickListener {
     }
 
     /**
-     * This is currently unused, but could be used to handle button pushes from another class.
-     *
-     * @param activity_in The calling Activity
-     * @param context_in The calling Activity's context
-     */
-    public ListView_Handler (Activity activity_in,  Context context_in) {
-
-        // Unused right now.
-    }
-
-    /**
-     * This will find the buttons by their ID and add a listener to them.
+     * This will find the ListViews by their ID and add a listener to them.
      */
     private void set_up_listView() {
 
@@ -91,6 +78,7 @@ public class ListView_Handler implements AdapterView.OnItemClickListener {
 
         String filename_pressed = ((TextView)view).getText().toString();
 
+        // Loads the selected image from Dropbox.
         main_activity.imageView_handler.set_image_from_filename(filename_pressed);
 
     }
@@ -102,6 +90,7 @@ public class ListView_Handler implements AdapterView.OnItemClickListener {
 
         Log.i(tag, "Refreshing ListView");
 
+        // Downloads the files located in this directory in Dropbox
         Download_File_List_Utility refresh_file_list = new Download_File_List_Utility(main_activity,
                 main_activity_context, main_activity.get_mApi(), "/", listView_dropbox_files);
 

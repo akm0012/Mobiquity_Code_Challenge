@@ -37,7 +37,7 @@
     </layouts>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.andrewkingmarshall.mobiquitycodechallenge" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="tag" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d4fd5c3-8cd1-427b-9a4a-8bf556efa30e" name="Default" comment="" />
@@ -61,62 +61,54 @@
     <favorites_list name="Mobiquity Code Challenge" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.217494" vertical-offset="1522" max-vertical-offset="5056">
-              <caret line="271" column="5" selection-start-line="271" selection-start-column="5" selection-end-line="271" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#9901#9902#0" expanded="true" />
-                <element signature="e#9933#9934#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Download_File_List_Utility.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/Utilities/Download_File_List_Utility.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1056" max-vertical-offset="3232">
-              <caret line="92" column="29" selection-start-line="92" selection-start-column="29" selection-end-line="92" selection-end-column="29" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2687#2695#0" expanded="true" />
-                <element signature="e#3200#3218#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ListView_Handler.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/UI_Handlers/ListView_Handler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1092" max-vertical-offset="2320">
-              <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="docComment;method#ListView_Handler#1;class#ListView_Handler#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Button_Handler.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/UI_Handlers/Button_Handler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1792" max-vertical-offset="3472">
-              <caret line="108" column="40" selection-start-line="108" selection-start-column="34" selection-end-line="108" selection-end-column="40" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="docComment;method#Button_Handler#1;class#Button_Handler#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.4709382">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="Download_File_List_Utility.java" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/Utilities/Download_File_List_Utility.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.54928017" vertical-offset="320" max-vertical-offset="3536">
+                  <caret line="51" column="75" selection-start-line="51" selection-start-column="4" selection-end-line="51" selection-end-column="75" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="e#3021#3029#0" expanded="true" />
+                    <element signature="e#3534#3552#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="Download_Image_Utility.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/Utilities/Download_Image_Utility.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3888">
+                  <caret line="233" column="7" selection-start-line="233" selection-start-column="7" selection-end-line="233" selection-end-column="7" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Upload_Image_Utility.java" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/Utilities/Upload_Image_Utility.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.64310145" vertical-offset="284" max-vertical-offset="3728">
+                  <caret line="53" column="21" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -1333,23 +1325,22 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/Utilities/Download_Utility.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/color.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/UI_Handlers/ImageView_Handler.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/UI_Handlers/Swipe_to_Refresh_Handler.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/UI_Handlers/ListView_Handler.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/Utilities/Upload_Image_Utility.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/Utilities/Download_Image_Utility.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_view_row.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/Utilities/Download_File_List_Utility.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/UI_Handlers/Button_Handler.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/UI_Handlers/Button_Handler.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/UI_Handlers/ImageView_Handler.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/UI_Handlers/ListView_Handler.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/UI_Handlers/Swipe_to_Refresh_Handler.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/Utilities/Download_File_List_Utility.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/Utilities/Download_Image_Utility.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/Utilities/Upload_Image_Utility.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="454" />
     <option name="y" value="23" />
-    <option name="width" value="2104" />
+    <option name="width" value="2558" />
     <option name="height" value="1413" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -1786,7 +1777,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="454" y="23" width="2104" height="1413" extended-state="0" />
+    <frame x="0" y="23" width="2558" height="1413" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1802,14 +1793,14 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299923" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4695451" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28218967" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16052376" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13155803" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23207402" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1845,8 +1836,10 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9901#9902#0" expanded="true" />
-            <element signature="e#9933#9934#0" expanded="true" />
+            <element signature="e#9725#9726#0" expanded="true" />
+            <element signature="e#9752#9753#0" expanded="true" />
+            <element signature="e#9860#9861#0" expanded="true" />
+            <element signature="e#9892#9893#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1897,8 +1890,10 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9901#9902#0" expanded="true" />
-            <element signature="e#9933#9934#0" expanded="true" />
+            <element signature="e#9725#9726#0" expanded="true" />
+            <element signature="e#9752#9753#0" expanded="true" />
+            <element signature="e#9860#9861#0" expanded="true" />
+            <element signature="e#9892#9893#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1925,8 +1920,10 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9901#9902#0" expanded="true" />
-            <element signature="e#9933#9934#0" expanded="true" />
+            <element signature="e#9725#9726#0" expanded="true" />
+            <element signature="e#9752#9753#0" expanded="true" />
+            <element signature="e#9860#9861#0" expanded="true" />
+            <element signature="e#9892#9893#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1992,34 +1989,53 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/UI_Handlers/ImageView_Handler.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5121951" vertical-offset="748" max-vertical-offset="1568">
-          <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.7264673" vertical-offset="304" max-vertical-offset="5040">
+          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="docComment;method#ImageView_Handler#1;class#ImageView_Handler#0" expanded="false" />
-            <element signature="method#ImageView_Handler#1;class#ImageView_Handler#0" expanded="false" />
+            <element signature="e#9725#9726#0" expanded="true" />
+            <element signature="e#9752#9753#0" expanded="true" />
+            <element signature="e#9860#9861#0" expanded="true" />
+            <element signature="e#9892#9893#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/Utilities/Upload_Image_Utility.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/UI_Handlers/ImageView_Handler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33292684" vertical-offset="1007" max-vertical-offset="2960">
-          <caret line="80" column="43" selection-start-line="80" selection-start-column="43" selection-end-line="80" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.03543743" vertical-offset="0" max-vertical-offset="1200">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/UI_Handlers/Button_Handler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1517165" vertical-offset="0" max-vertical-offset="3376">
+          <caret line="65" column="5" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2395#2789#0" expanded="true" />
-            <element signature="e#2778#2779#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/UI_Handlers/ListView_Handler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.03543743" vertical-offset="0" max-vertical-offset="2256">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+          <folding>
+            <element signature="e#3226#3227#0" expanded="true" />
+            <element signature="e#3281#3282#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/UI_Handlers/Swipe_to_Refresh_Handler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.902439" vertical-offset="796" max-vertical-offset="1664">
-          <caret line="96" column="5" selection-start-line="96" selection-start-column="5" selection-end-line="96" selection-end-column="5" />
+        <state vertical-scroll-proportion="1.5946844" vertical-offset="0" max-vertical-offset="1664">
+          <caret line="90" column="36" selection-start-line="90" selection-start-column="36" selection-end-line="90" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -2028,58 +2044,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/Utilities/Download_Image_Utility.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52682924" vertical-offset="704" max-vertical-offset="3552">
-          <caret line="71" column="33" selection-start-line="71" selection-start-column="33" selection-end-line="71" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3888">
+          <caret line="233" column="7" selection-start-line="233" selection-start-column="7" selection-end-line="233" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2894#3391#0" expanded="true" />
-            <element signature="e#3380#3381#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/Utilities/Download_File_List_Utility.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1056" max-vertical-offset="3232">
-          <caret line="92" column="29" selection-start-line="92" selection-start-column="29" selection-end-line="92" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.54928017" vertical-offset="320" max-vertical-offset="3536">
+          <caret line="51" column="75" selection-start-line="51" selection-start-column="4" selection-end-line="51" selection-end-column="75" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2687#2695#0" expanded="true" />
-            <element signature="e#3200#3218#0" expanded="true" />
+            <element signature="e#3021#3029#0" expanded="true" />
+            <element signature="e#3534#3552#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/UI_Handlers/ListView_Handler.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/Utilities/Upload_Image_Utility.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1092" max-vertical-offset="2320">
-          <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.64310145" vertical-offset="284" max-vertical-offset="3728">
+          <caret line="53" column="21" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="docComment;method#ListView_Handler#1;class#ListView_Handler#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/UI_Handlers/Button_Handler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1792" max-vertical-offset="3472">
-          <caret line="108" column="40" selection-start-line="108" selection-start-column="34" selection-end-line="108" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;method#Button_Handler#1;class#Button_Handler#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/andrewkingmarshall/mobiquitycodechallenge/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.217494" vertical-offset="1522" max-vertical-offset="5056">
-          <caret line="271" column="5" selection-start-line="271" selection-start-column="5" selection-end-line="271" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#9901#9902#0" expanded="true" />
-            <element signature="e#9933#9934#0" expanded="true" />
           </folding>
         </state>
       </provider>
