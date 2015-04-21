@@ -9,7 +9,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.andrewkingmarshall.mobiquitycodechallenge.MainActivity;
 
@@ -82,28 +81,6 @@ public class Location_Utility implements LocationListener, GpsStatus.Listener{
         location_manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, milli_update,
                 meters_distance, this);
 
-//        // Check to make sure GPS is enabled.
-//        boolean isGPSEnabled = location_manager
-//                .isProviderEnabled(LocationManager.GPS_PROVIDER);
-//        if (isGPSEnabled)
-//        {
-//            if (location_manager != null)
-//            {
-//                // Register GPSStatus listener for events
-//                location_manager.addGpsStatusListener(this);
-//
-//                // Set the Listener to update the location when we move
-//                location_manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, milli_update,
-//                        meters_distance, this);
-//            }
-//        }
-//
-//        // GPS is disabled
-//        else {
-//            Log.e(tag, "GPS Disabled");
-//            //TODO: Ideally we need to listen for this and deal with it programically.
-//            main_activity.showToast("Enable Location and Restart App to Use Location Data");
-//        }
     }
 
     /**
@@ -135,6 +112,13 @@ public class Location_Utility implements LocationListener, GpsStatus.Listener{
         }
     }
 
+    /**
+     * Listener that updates whenever our location changes.
+     *
+     * Triggered by time or distance.
+     *
+     * @param location The new location object.
+     */
     public void onLocationChanged(Location location) {
         Log.i(tag, "Updating Location.");
 

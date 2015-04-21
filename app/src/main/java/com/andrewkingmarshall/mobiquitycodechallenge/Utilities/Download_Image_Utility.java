@@ -20,6 +20,7 @@ import com.dropbox.client2.exception.DropboxPartialFileException;
 import com.dropbox.client2.exception.DropboxServerException;
 import com.dropbox.client2.exception.DropboxUnlinkedException;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -63,7 +64,7 @@ public class Download_Image_Utility extends AsyncTask<Void, Long, Boolean> {
     private boolean mCanceled;
 
     /** Used to store any error messages that may arise */
-    private String mErrorMsg;
+    private String mErrorMsg = "Error";
 
 
 
@@ -124,6 +125,7 @@ public class Download_Image_Utility extends AsyncTask<Void, Long, Boolean> {
             }
 
             String cachePath = mContext.getCacheDir().getAbsolutePath() + "/" + IMAGE_FILE_NAME;
+
             try {
                 mFos = new FileOutputStream(cachePath);
             } catch (FileNotFoundException e) {
