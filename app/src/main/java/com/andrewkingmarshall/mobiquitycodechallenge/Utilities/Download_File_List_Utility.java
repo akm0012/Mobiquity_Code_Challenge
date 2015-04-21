@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.andrewkingmarshall.mobiquitycodechallenge.MainActivity;
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.exception.DropboxException;
 import com.dropbox.client2.exception.DropboxIOException;
@@ -36,6 +37,7 @@ public class Download_File_List_Utility extends AsyncTask<Void, Long, Boolean> {
 
     /** Used to keep a reference to our MainActivity */
     private Context main_activity_context;
+    private MainActivity main_activity;
 
     /** Used for Dropbox Access */
     private DropboxAPI<?> mApi;
@@ -60,10 +62,11 @@ public class Download_File_List_Utility extends AsyncTask<Void, Long, Boolean> {
      * @param dropboxPath
      * @param listView_in
      */
-    public Download_File_List_Utility(Context context, DropboxAPI<?> api,
+    public Download_File_List_Utility(MainActivity main_activiry_in, Context context, DropboxAPI<?> api,
                                       String dropboxPath, ListView listView_in) {
         // We set the context this way so we don't accidentally leak activities
         main_activity_context = context.getApplicationContext();
+        main_activity = main_activiry_in;
 
         mApi = api;
         mPath = dropboxPath;
@@ -184,6 +187,9 @@ public class Download_File_List_Utility extends AsyncTask<Void, Long, Boolean> {
             // Couldn't download file list, so show an error
             showToast(mErrorMsg);
         }
+
+        // Stop the refresh animation
+        main_activity.refresh_handler.stop_refreshing();
     }
 
     /**

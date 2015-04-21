@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.andrewkingmarshall.mobiquitycodechallenge.UI_Handlers.Button_Handler;
 import com.andrewkingmarshall.mobiquitycodechallenge.UI_Handlers.ListView_Handler;
+import com.andrewkingmarshall.mobiquitycodechallenge.UI_Handlers.Swipe_to_Refresh_Handler;
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.session.AccessTokenPair;
@@ -47,6 +48,9 @@ public class MainActivity extends ActionBarActivity {
     /** Used to manage the ListView */
     public ListView_Handler listView_handler;
 
+    /** Used to refresh the List of Files */
+    public Swipe_to_Refresh_Handler refresh_handler;
+
 
     /** Used to indicate if we are linked to a Dropbox account */
     private boolean logged_in;
@@ -67,6 +71,9 @@ public class MainActivity extends ActionBarActivity {
 
         // Set up the ListView handler
         listView_handler = new ListView_Handler(this, this);
+
+        // Set up the refresh handler
+        refresh_handler = new Swipe_to_Refresh_Handler(this, this);
 
         //TODO: SetLoggedIn - mApi.getSession().isLinked() - indicates if we are logged in. Alter UI Accordingly
     }

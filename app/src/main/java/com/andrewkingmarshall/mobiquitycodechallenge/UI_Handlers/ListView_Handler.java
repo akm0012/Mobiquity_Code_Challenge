@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.andrewkingmarshall.mobiquitycodechallenge.MainActivity;
 import com.andrewkingmarshall.mobiquitycodechallenge.R;
@@ -84,8 +85,7 @@ public class ListView_Handler implements AdapterView.OnItemClickListener {
      */
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        Log.i(tag, "OnItemClick:parent: " + parent.toString());
-        Log.i(tag, "OnItemClick:view: " + view.toString());
+        Log.i(tag, "OnItemClick:view: " + ((TextView)view).getText().toString());
         Log.i(tag, "OnItemClick:position: " + position);
         Log.i(tag, "OnItemClick:id: " + id);
 
@@ -98,8 +98,8 @@ public class ListView_Handler implements AdapterView.OnItemClickListener {
 
         Log.i(tag, "Refreshing ListView");
 
-        Download_File_List_Utility refresh_file_list = new Download_File_List_Utility(main_activity_context,
-                main_activity.get_mApi(), "/", listView_dropbox_files);
+        Download_File_List_Utility refresh_file_list = new Download_File_List_Utility(main_activity,
+                main_activity_context, main_activity.get_mApi(), "/", listView_dropbox_files);
 
         refresh_file_list.execute();
     }
