@@ -1,12 +1,11 @@
 package com.andrewkingmarshall.mobiquitycodechallenge;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.andrewkingmarshall.mobiquitycodechallenge.UI_Handlers.Button_Handler;
@@ -18,15 +17,14 @@ import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
 
-import java.io.File;
 
 /**
  * MainActivity.java
  *
  * @author         :: Andrew K Marshall
  * Created On      :: 4/20/15
- * Revision By     :: N/A
- * Last Revised On :: N/A
+ * Revision By     :: Andrew K Marshall
+ * Last Revised On :: 4/21/15
  *
  * This class hanldes all the logic in the Main Activity.
  *
@@ -244,6 +242,7 @@ public class MainActivity extends ActionBarActivity {
             button_handler.set_button_text(R.id.button_dropbox_link, "Unlink Dropbox"); //TODO String Resource
             refresh_handler.set_swipe_to_refresh_enabled(true);
             listView_handler.refresh_listView();
+            findViewById(R.id.button_camera).setVisibility(View.VISIBLE);
         }
 
         else {
@@ -251,8 +250,25 @@ public class MainActivity extends ActionBarActivity {
             refresh_handler.stop_refreshing();
             refresh_handler.set_swipe_to_refresh_enabled(false);
             listView_handler.remove_all_items();
-            //TODO: Remove all items from listview, make everything null
+            findViewById(R.id.button_camera).setVisibility(View.GONE);
         }
+    }
+
+    /**
+     * Override this so if the user pushed the back button when the Image is displayed,
+     * the app won't exit.
+     */
+    @Override
+    public void onBackPressed() {
+
+        if (findViewById(R.id.imageView_main_canvas).getVisibility() == View.VISIBLE) {
+            button_handler.go_back_from_image_view();
+        }
+
+        else {
+            super.onBackPressed();
+        }
+
     }
 
     /**

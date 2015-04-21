@@ -39,23 +39,44 @@ public class Download_Image_Utility extends AsyncTask<Void, Long, Boolean> {
     /** Used for LogCat Tags */
     public final String tag = "general_LogCat_tag";
 
+    /** Used to reference the MainActivity */
     private Context mContext;
+    private MainActivity main_activity;
+
+    /** Used to indicate progress of the download */
     private final ProgressDialog mDialog;
+
+    /** Needed to interact with Dropbox */
     private DropboxAPI<?> mApi;
     private String mPath;
+
+    /** Used for displaying the image we are downloading */
     private ImageView mView;
     private Drawable mDrawable;
+    private Long mFileLen;
 
+    /** Used for saving in the temp cache */
     private FileOutputStream mFos;
 
+    /** Used to indicate if we cancel a download */
     private boolean mCanceled;
-    private Long mFileLen;
+
+    /** Used to store any error messages that may arise */
     private String mErrorMsg;
 
-    private MainActivity main_activity;
+
 
     private final static String IMAGE_FILE_NAME = "temp.png";
 
+    /**
+     * //TODO: Fill this in later
+     *
+     * @param main_activity_in
+     * @param context
+     * @param api
+     * @param dropboxPath
+     * @param view
+     */
     public Download_Image_Utility(MainActivity main_activity_in, Context context, DropboxAPI<?> api,
                                  String dropboxPath, ImageView view) {
 
@@ -95,7 +116,6 @@ public class Download_Image_Utility extends AsyncTask<Void, Long, Boolean> {
             if (mCanceled) {
                 return false;
             }
-
 
             String cachePath = mContext.getCacheDir().getAbsolutePath() + "/" + IMAGE_FILE_NAME;
             try {
@@ -180,6 +200,7 @@ public class Download_Image_Utility extends AsyncTask<Void, Long, Boolean> {
             main_activity.findViewById(R.id.listView_dropbox_files).setVisibility(View.GONE);
             main_activity.findViewById(R.id.imageView_main_canvas).setVisibility(View.VISIBLE);
             main_activity.findViewById(R.id.button_back).setVisibility(View.VISIBLE);
+            main_activity.findViewById(R.id.button_camera).setVisibility(View.GONE);
             main_activity.refresh_handler.set_swipe_to_refresh_enabled(false);
 
         } else {

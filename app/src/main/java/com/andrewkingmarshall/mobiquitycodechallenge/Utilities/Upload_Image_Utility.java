@@ -4,8 +4,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.os.NetworkOnMainThreadException;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.andrewkingmarshall.mobiquitycodechallenge.MainActivity;
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.ProgressListener;
 import com.dropbox.client2.exception.DropboxException;
@@ -47,11 +50,15 @@ public class Upload_Image_Utility extends AsyncTask<Void, Long, Boolean> {
 
     private String mErrorMsg;
 
+    MainActivity main_activity;
 
-    public Upload_Image_Utility(Context context, DropboxAPI<?> api, String dropboxPath,
+
+    public Upload_Image_Utility(MainActivity main_activity_in, Context context, DropboxAPI<?> api, String dropboxPath,
                          File file) {
         // We set the context this way so we don't accidentally leak activities
         mContext = context.getApplicationContext();
+
+        main_activity = main_activity_in;
 
         mFileLen = file.length();
         mApi = api;
@@ -66,8 +73,14 @@ public class Upload_Image_Utility extends AsyncTask<Void, Long, Boolean> {
         mDialog.setButton(ProgressDialog.BUTTON_POSITIVE, "Cancel", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {
-                // This will cancel the putFile operation
-                mRequest.abort();
+
+                try {
+                    // This will cancel the putFile operation
+                    mRequest.abort();
+                } catch (NetworkOnMainThreadException e) {
+                    Log.e(tag, "Error: " + e.getMessage());
+                }
+
             }
         });
         mDialog.show();
@@ -154,6 +167,8 @@ public class Upload_Image_Utility extends AsyncTask<Void, Long, Boolean> {
         mDialog.dismiss();
         if (result) {
             showToast("Image successfully uploaded");
+            main_activity.refresh_handler.force_refresh();
+
         } else {
             showToast(mErrorMsg);
         }

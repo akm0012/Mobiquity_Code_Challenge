@@ -77,29 +77,6 @@ public class Download_File_List_Utility extends AsyncTask<Void, Long, Boolean> {
         listView_dropbox_files = listView_in;
     }
 
-    //TODO : Used for testing only!
-    private void get_names_of_files() {
-
-        ArrayList<String> filename = new ArrayList<String>();
-        String mPath = "/";
-        DropboxAPI.Entry dirent = null;
-        try {
-            dirent = mApi.metadata(mPath, 1000, null, true, null);
-        } catch (DropboxException e) {
-            System.out.println("Error :  " + e.getMessage());
-        }
-        for (DropboxAPI.Entry ent : dirent.contents) {
-            if (ent.isDir) {
-                filename.add(ent.fileName());
-                Log.d(tag, "File Name: " + ent.fileName());
-            }
-//            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_list_item_1, filename );
-//            mListView.setAdapter(arrayAdapter);
-
-
-        }
-    }
-
     @Override
     protected Boolean doInBackground(Void... params) {
         try {

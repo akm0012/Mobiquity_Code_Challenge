@@ -91,7 +91,6 @@ public class ListView_Handler implements AdapterView.OnItemClickListener {
 
         String filename_pressed = ((TextView)view).getText().toString();
 
-        //TODO: Hide / Show UI elements
         main_activity.imageView_handler.set_image_from_filename(filename_pressed);
 
     }

@@ -13,8 +13,8 @@ import com.andrewkingmarshall.mobiquitycodechallenge.R;
  *
  * @author         :: Andrew K Marshall
  * Created On      :: 4/20/15
- * Revision By     :: N/A
- * Last Revised On :: N/A
+ * Revision By     :: 4/21/15
+ * Last Revised On :: Andrew K Marshall
  *
  * This class hanldes the Swipe to Refresh widget.
  *
@@ -88,5 +88,11 @@ public class Swipe_to_Refresh_Handler implements SwipeRefreshLayout.OnRefreshLis
      */
     public void set_swipe_to_refresh_enabled(boolean enabled) {
         swipe_refresh_layout.setEnabled(enabled);
+    }
+
+    public void force_refresh() {
+        swipe_refresh_layout.setRefreshing(true);
+        // Refresh the ListView
+        main_activity.listView_handler.refresh_listView();
     }
 }

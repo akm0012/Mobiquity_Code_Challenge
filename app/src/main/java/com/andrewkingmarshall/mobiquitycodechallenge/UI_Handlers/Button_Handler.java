@@ -26,8 +26,8 @@ import java.util.Locale;
  *
  * @author         :: Andrew K Marshall
  * Created On      :: 4/20/15
- * Revision By     :: N/A
- * Last Revised On :: N/A
+ * Revision By     :: Andrew K Marshall
+ * Last Revised On :: 4/21/15
  *
  * This class hanldes all button pushes.
  *
@@ -118,12 +118,7 @@ public class Button_Handler implements View.OnClickListener {
             case R.id.button_back:
                 Log.i(tag, "Dropbox Back Button Pushed");
 
-                // Hide the ImageView while showing everything else
-                main_activity.findViewById(R.id.button_dropbox_link).setVisibility(View.VISIBLE);
-                main_activity.findViewById(R.id.listView_dropbox_files).setVisibility(View.VISIBLE);
-                main_activity.findViewById(R.id.imageView_main_canvas).setVisibility(View.GONE);
-                main_activity.findViewById(R.id.button_back).setVisibility(View.GONE);
-                main_activity.refresh_handler.set_swipe_to_refresh_enabled(true);
+                go_back_from_image_view();
 
                 break;
 
@@ -159,6 +154,19 @@ public class Button_Handler implements View.OnClickListener {
     }
 
     /**
+     * Goes back to the main screen.
+     */
+    public void go_back_from_image_view() {
+        // Hide the ImageView while showing everything else
+        main_activity.findViewById(R.id.button_dropbox_link).setVisibility(View.VISIBLE);
+        main_activity.findViewById(R.id.listView_dropbox_files).setVisibility(View.VISIBLE);
+        main_activity.findViewById(R.id.imageView_main_canvas).setVisibility(View.GONE);
+        main_activity.findViewById(R.id.button_back).setVisibility(View.GONE);
+        main_activity.findViewById(R.id.button_camera).setVisibility(View.VISIBLE);
+        main_activity.refresh_handler.set_swipe_to_refresh_enabled(true);
+    }
+
+    /**
      * Handles a new picture being created from the intent created in the MainActivity.
      *
      * @param requestCode The integer request code originally supplied to startActivityForResult(),
@@ -181,7 +189,7 @@ public class Button_Handler implements View.OnClickListener {
                 File file = new File(mCameraFileName);
 
                 if (uri != null) {
-                    Upload_Image_Utility upload = new Upload_Image_Utility(main_activity_context,
+                    Upload_Image_Utility upload = new Upload_Image_Utility(main_activity, main_activity_context,
                             main_activity.get_mApi(), "/", file);
                     upload.execute();
                 }
