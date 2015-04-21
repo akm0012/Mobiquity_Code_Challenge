@@ -80,4 +80,13 @@ public class Swipe_to_Refresh_Handler implements SwipeRefreshLayout.OnRefreshLis
 
         swipe_refresh_layout.setRefreshing(false);
     }
+
+    /**
+     * Sets whether or not the refresh widget is enabled.
+     *
+     * @param enabled A boolean indicating if the widget is enabled.
+     */
+    public void set_swipe_to_refresh_enabled(boolean enabled) {
+        swipe_refresh_layout.setEnabled(enabled);
+    }
 }

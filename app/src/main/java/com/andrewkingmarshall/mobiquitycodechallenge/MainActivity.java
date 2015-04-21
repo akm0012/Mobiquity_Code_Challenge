@@ -75,7 +75,8 @@ public class MainActivity extends ActionBarActivity {
         // Set up the refresh handler
         refresh_handler = new Swipe_to_Refresh_Handler(this, this);
 
-        //TODO: SetLoggedIn - mApi.getSession().isLinked() - indicates if we are logged in. Alter UI Accordingly
+        // Set the UI according to if we are logged in or not.
+        set_logged_in(mApi.getSession().isLinked());
     }
 
     public void onResume() {
@@ -94,7 +95,7 @@ public class MainActivity extends ActionBarActivity {
 
                 // Store it locally in our app for later use
                 storeAuth(session);
-                //TODO: setLoggedIn(true);
+                set_logged_in(true);
 
                 logged_in = true;
             } catch (IllegalStateException e) {
@@ -141,7 +142,7 @@ public class MainActivity extends ActionBarActivity {
         // Clear our stored keys
         clearKeys();
         // Change UI state to display logged out version
-        //TODO: setLoggedIn(false);
+        set_logged_in(false);
         logged_in = false;
     }
 
@@ -232,6 +233,28 @@ public class MainActivity extends ActionBarActivity {
     // ----- Getters and Setters -----
 
     /**
+     * Sets the boolean indicating if we are logged in.
+     * @param logged_in Boolean indicating if we are logged in.
+     */
+    public void set_logged_in(boolean logged_in) {
+        this.logged_in = logged_in;
+
+        if (logged_in) {
+            button_handler.set_button_text(R.id.button_dropbox_link, "Unlink Dropbox"); //TODO String Resource
+            refresh_handler.set_swipe_to_refresh_enabled(true);
+            listView_handler.refresh_listView();
+        }
+
+        else {
+            button_handler.set_button_text(R.id.button_dropbox_link, "Link to Dropbox"); //TODO String Resource
+            refresh_handler.stop_refreshing();
+            refresh_handler.set_swipe_to_refresh_enabled(false);
+            listView_handler.remove_all_items();
+            //TODO: Remove all items from listview, make everything null
+        }
+    }
+
+    /**
      * @return The API needed to log in.
      */
     public DropboxAPI<AndroidAuthSession> get_mApi() {
@@ -245,13 +268,6 @@ public class MainActivity extends ActionBarActivity {
         return logged_in;
     }
 
-    /**
-     * Sets the boolean indicating if we are logged in.
-     * @param logged_in Boolean indicating if we are logged in.
-     */
-    public void set_logged_in(boolean logged_in) {
-        this.logged_in = logged_in;
-    }
 
 }
 

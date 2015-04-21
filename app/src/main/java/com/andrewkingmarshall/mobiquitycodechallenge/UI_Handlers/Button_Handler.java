@@ -109,4 +109,15 @@ public class Button_Handler implements View.OnClickListener {
         }
     }
 
+    /** Sets the text of a button.
+     *
+     * @param button_id The ID of the button you want to change.
+     * @param text The new text of that button.
+     */
+    public void set_button_text(int button_id, String text) {
+
+        ((Button) main_activity.findViewById(button_id)).setText("" + text);
+
+    }
+
 }

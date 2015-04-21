@@ -103,6 +103,13 @@ public class ListView_Handler implements AdapterView.OnItemClickListener {
 
         refresh_file_list.execute();
     }
+
+    /**
+     * Removes all the items from the ListView
+     */
+    public void remove_all_items() {
+        listView_dropbox_files.setAdapter(null);
+    }
 }
 
 
