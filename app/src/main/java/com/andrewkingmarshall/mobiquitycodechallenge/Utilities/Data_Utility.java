@@ -1,7 +1,6 @@
 package com.andrewkingmarshall.mobiquitycodechallenge.Utilities;
 
 import android.content.Context;
-import android.graphics.AvoidXfermode;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -64,13 +63,22 @@ public class Data_Utility {
      * Handles the initialization.
      *
      * Used so we can add more constructors if need be.
+     *
      */
     public void init() {
 
         hash_map = new HashMap();
 
         // Check to see if there is a HashMap file saved, if so we restore it
+        load_hash_map();
+    }
 
+    /**
+     * Checks if there is a hash map saved.
+     *
+     * If so it restores it.
+     */
+    public void load_hash_map() {
         File file = new File(main_activity.getDir("data", MainActivity.MODE_PRIVATE) , "map");
         if(file.exists()) {
             Log.d(tag, "A HashMap File Exists");
@@ -85,6 +93,8 @@ public class Data_Utility {
 
             try {
                 Log.d(tag, "Getting saved Hash Map");
+
+                // Get the saved hash map
                 hash_map = (HashMap)inputStream.readObject();
                 inputStream.close();
             } catch (ClassNotFoundException e) {
@@ -93,11 +103,6 @@ public class Data_Utility {
                 e.printStackTrace();
             }
         }
-
-
-
-        //TODO Load exsisting HashMap data
-
     }
 
     public void save_data() {
