@@ -119,45 +119,48 @@ public class Button_Handler implements View.OnClickListener {
                 break;
 
             case R.id.button_camera:
-                Log.i(tag, "Dropbox Back Button Pushed");
+                Log.i(tag, "Dropbox Camera Button Pushed");
 
-                Intent intent = new Intent();
-                // Picture from camera
-                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+                main_activity.kill_map();
+//                Intent intent = new Intent();
+//                // Picture from camera
+//                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+//
+//                // This is not the right way to do this, but for some reason, having
+//                // it store it in
+//                // MediaStore.Images.Media.EXTERNAL_CONTENT_URI isn't working right.
+//
+//                Date date = new Date();
+//                DateFormat df = new SimpleDateFormat("yyyy-MM-dd-kk-mm-ss", Locale.US);
+//
+//                String current_city = main_activity.location_utility.get_current_city();
+//
+//                String newPicFile;
+//
+//                if (!current_city.equalsIgnoreCase("n/a")) {
+//
+//                    newPicFile = current_city + "_" + df.format(date) + ".jpg";
+//
+//                }
+//
+//                else {
+//                    newPicFile = df.format(date) + ".jpg";
+//                }
+//
+//                String outPath = new File(Environment.getExternalStorageDirectory(), newPicFile).getPath();
+//                File outFile = new File(outPath);
+//
+//                mCameraFileName = outFile.toString();
+//                Uri outuri = Uri.fromFile(outFile);
+//                intent.putExtra(MediaStore.EXTRA_OUTPUT, outuri);
+//                Log.i(tag, "Importing New Picture: " + mCameraFileName);
+//                try {
+//                    main_activity.startActivityForResult(intent, NEW_PICTURE); // See MainActivity for onActivityResult()
+//                } catch (ActivityNotFoundException e) {
+//                    main_activity.showToast("There doesn't seem to be a camera.");
+//                }
 
-                // This is not the right way to do this, but for some reason, having
-                // it store it in
-                // MediaStore.Images.Media.EXTERNAL_CONTENT_URI isn't working right.
-
-                Date date = new Date();
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd-kk-mm-ss", Locale.US);
-
-                String current_city = main_activity.location_utility.get_current_city();
-
-                String newPicFile;
-
-                if (!current_city.equalsIgnoreCase("n/a")) {
-
-                    newPicFile = current_city + "_" + df.format(date) + ".jpg";
-
-                }
-
-                else {
-                    newPicFile = df.format(date) + ".jpg";
-                }
-
-                String outPath = new File(Environment.getExternalStorageDirectory(), newPicFile).getPath();
-                File outFile = new File(outPath);
-
-                mCameraFileName = outFile.toString();
-                Uri outuri = Uri.fromFile(outFile);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, outuri);
-                Log.i(tag, "Importing New Picture: " + mCameraFileName);
-                try {
-                    main_activity.startActivityForResult(intent, NEW_PICTURE); // See MainActivity for onActivityResult()
-                } catch (ActivityNotFoundException e) {
-                    main_activity.showToast("There doesn't seem to be a camera.");
-                }
+                break;
 
         }
     }

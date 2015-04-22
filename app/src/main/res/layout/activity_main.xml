@@ -54,6 +54,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content" />
 
+
+
             <Button
                 android:id="@+id/button_back"
                 android:layout_width="wrap_content"
@@ -62,6 +64,13 @@
                 android:text="Back"
                 android:visibility="gone" />
 
+            <Button
+                android:id="@+id/button_map_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:text="Back"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/button_camera"
@@ -82,5 +91,14 @@
             android:layout_marginTop="10dp"
             android:contentDescription="globe"
             android:src="@drawable/red_globe" />
+
+        <FrameLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="70dp"
+            android:name="com.google.android.gms.maps.MapFragment"/>
+
     </FrameLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

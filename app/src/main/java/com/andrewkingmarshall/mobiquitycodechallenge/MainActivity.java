@@ -1,7 +1,10 @@
 package com.andrewkingmarshall.mobiquitycodechallenge;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
+import android.location.LocationManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +21,12 @@ import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 
 /**
@@ -31,7 +40,7 @@ import com.dropbox.client2.session.AppKeyPair;
  * This class hanldes all the logic in the Main Activity.
  *
  */
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements OnMapReadyCallback {
 
     /** Used for LogCat Tags */
     public final String tag = "general_LogCat_tag";
@@ -66,6 +75,9 @@ public class MainActivity extends ActionBarActivity {
     /** Used to store coordinate data */
     public Data_Utility data_utility;
 
+    /** The Map Fragment */
+    MapFragment map_fragment;
+
     /** Used to indicate if we are linked to a Dropbox account */
     private boolean logged_in;
 
@@ -98,6 +110,21 @@ public class MainActivity extends ActionBarActivity {
         // Set up the Data Utility
         data_utility = new Data_Utility(this, this);
 
+        findViewById(R.id.map).setVisibility(View.VISIBLE);
+        map_fragment = MapFragment.newInstance();
+        FragmentTransaction fragmentTransaction =
+                getFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.map, map_fragment);
+        fragmentTransaction.commit();
+
+        map_fragment.getMapAsync(this);
+
+//        // Get a handle to the map fragment
+//        map_fragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+//
+//        // Add the listener
+//        map_fragment.getMapAsync(this);
+
         // Set the UI according to if we are logged in or not.
         set_logged_in(mApi.getSession().isLinked());
     }
@@ -127,6 +154,29 @@ public class MainActivity extends ActionBarActivity {
             }
         }
     }
+
+    public void onMapReady(GoogleMap map_in) {
+
+        Location loc = new Location(LocationManager.GPS_PROVIDER);
+        loc.setLatitude(29.648591);
+        loc.setLongitude(-82.331251);
+
+        map_in.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(loc.getLatitude(), loc.getLongitude()), 14.0f));
+
+        map_in.addMarker(new MarkerOptions()
+                .position(new LatLng(29.648591, -82.331251))
+                .title("Mobiquity"));
+
+    }
+
+    public void kill_map() {
+
+        getFragmentManager().beginTransaction().remove(map_fragment).commit();
+
+        findViewById(R.id.map).setVisibility(View.GONE);
+
+    }
+
 
     /**
      * This is what gets called on finishing a media piece to import.
@@ -320,4 +370,6 @@ public class MainActivity extends ActionBarActivity {
         super.onDestroy();
         Log.i(tag, "MainActivity.onDestroy()");
     }
+
+
 }
