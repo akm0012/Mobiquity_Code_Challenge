@@ -225,6 +225,7 @@ public class Download_Image_Utility extends AsyncTask<Void, Long, Boolean> {
             main_activity.findViewById(R.id.button_back).setVisibility(View.VISIBLE);
             main_activity.findViewById(R.id.button_camera).setVisibility(View.GONE);
             main_activity.findViewById(R.id.imageView_globe).setVisibility(View.GONE);
+            main_activity.findViewById(R.id.button_show_map).setVisibility(View.GONE);
             main_activity.refresh_handler.set_swipe_to_refresh_enabled(false);
 
             // Display the Lat / Long coordinates if available

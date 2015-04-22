@@ -271,5 +271,14 @@ public class Data_Utility {
 
     }
 
+    /**
+     * Returns the hash map.
+     *
+     * @return The Hash Map with all the data.
+     */
+    public HashMap get_hash_map() {
+        return this.hash_map;
+    }
+
 
 }

@@ -2,6 +2,8 @@ package com.andrewkingmarshall.mobiquitycodechallenge.UI_Handlers;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.andrewkingmarshall.mobiquitycodechallenge.MainActivity;
@@ -19,7 +21,7 @@ import com.andrewkingmarshall.mobiquitycodechallenge.Utilities.Download_Image_Ut
  * This class hanldes the ImaveViews.
  *
  */
-public class ImageView_Handler {
+public class ImageView_Handler implements View.OnTouchListener{
 
     /** Used for LogCat Tags */
     public final String tag = "general_LogCat_tag";
@@ -31,6 +33,14 @@ public class ImageView_Handler {
     /** MainActivity ImageViews */
     private ImageView image_view_main_canvas;
     private ImageView imageView_globe;
+
+    /** Used to monitor Globe status */
+    private int globe_color;
+
+    /** Globe status' */
+    private final int GREEN = 1;
+    private final int RED = 2;
+    private final int GREY = 0;
 
     /**
      * This constructor is used when we are handling ImageViews from the MainActivity.
@@ -54,6 +64,10 @@ public class ImageView_Handler {
         // Get handles to the buttons
         image_view_main_canvas = (ImageView) main_activity.findViewById(R.id.imageView_main_canvas);
         imageView_globe = (ImageView) main_activity.findViewById(R.id.imageView_globe);
+
+        imageView_globe.setOnTouchListener(this);
+
+        globe_color = RED;
     }
 
     /**
@@ -75,6 +89,7 @@ public class ImageView_Handler {
     public void change_globe_green()
     {
         imageView_globe.setImageResource(R.drawable.green_globe);
+        globe_color = GREEN;
     }
 
     /**
@@ -83,6 +98,7 @@ public class ImageView_Handler {
     public void change_globe_red()
     {
         imageView_globe.setImageResource(R.drawable.red_globe);
+        globe_color = RED;
     }
 
     /**
@@ -91,5 +107,32 @@ public class ImageView_Handler {
     public void change_globe_grey()
     {
         imageView_globe.setImageResource(R.drawable.grey_globe);
+        globe_color = GREY;
+    }
+
+    /**
+     * Used to indicate what the globe means.
+     */
+    public boolean onTouch(View v, MotionEvent event) {
+
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            Log.i(tag, "Globe Touched Down ");
+
+            if (globe_color == GREEN) {
+
+                main_activity.showToast("GPS Link Established");
+
+            } else if (globe_color == RED) {
+
+                main_activity.showToast("GPS Searching");
+
+            } else if (globe_color == GREY) {
+
+                main_activity.showToast("GPS Disabled");
+
+            }
+        }
+
+        return false;
     }
 }

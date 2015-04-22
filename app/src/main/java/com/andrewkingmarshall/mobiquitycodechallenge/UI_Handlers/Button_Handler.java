@@ -4,10 +4,6 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationManager;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
@@ -25,7 +21,6 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 /**
@@ -52,6 +47,8 @@ public class Button_Handler implements View.OnClickListener {
     private Button button_dropbox_link;
     private Button button_back;
     private Button button_camera;
+    private Button button_map_back;
+    private Button button_show_map;
 
     /** Used for taking a picture */
     public static final int NEW_PICTURE = 1;
@@ -81,11 +78,15 @@ public class Button_Handler implements View.OnClickListener {
         button_dropbox_link = (Button) main_activity.findViewById(R.id.button_dropbox_link);
         button_back = (Button) main_activity.findViewById(R.id.button_back);
         button_camera = (Button) main_activity.findViewById(R.id.button_camera);
+        button_map_back = (Button) main_activity.findViewById(R.id.button_map_back);
+        button_show_map = (Button) main_activity.findViewById(R.id.button_show_map);
 
         // Add the button listeners
         button_dropbox_link.setOnClickListener(this);
         button_back.setOnClickListener(this);
         button_camera.setOnClickListener(this);
+        button_map_back.setOnClickListener(this);
+        button_show_map.setOnClickListener(this);
 
     }
 
@@ -121,44 +122,57 @@ public class Button_Handler implements View.OnClickListener {
             case R.id.button_camera:
                 Log.i(tag, "Dropbox Camera Button Pushed");
 
-                main_activity.kill_map();
-//                Intent intent = new Intent();
-//                // Picture from camera
-//                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-//
-//                // This is not the right way to do this, but for some reason, having
-//                // it store it in
-//                // MediaStore.Images.Media.EXTERNAL_CONTENT_URI isn't working right.
-//
-//                Date date = new Date();
-//                DateFormat df = new SimpleDateFormat("yyyy-MM-dd-kk-mm-ss", Locale.US);
-//
-//                String current_city = main_activity.location_utility.get_current_city();
-//
-//                String newPicFile;
-//
-//                if (!current_city.equalsIgnoreCase("n/a")) {
-//
-//                    newPicFile = current_city + "_" + df.format(date) + ".jpg";
-//
-//                }
-//
-//                else {
-//                    newPicFile = df.format(date) + ".jpg";
-//                }
-//
-//                String outPath = new File(Environment.getExternalStorageDirectory(), newPicFile).getPath();
-//                File outFile = new File(outPath);
-//
-//                mCameraFileName = outFile.toString();
-//                Uri outuri = Uri.fromFile(outFile);
-//                intent.putExtra(MediaStore.EXTRA_OUTPUT, outuri);
-//                Log.i(tag, "Importing New Picture: " + mCameraFileName);
-//                try {
-//                    main_activity.startActivityForResult(intent, NEW_PICTURE); // See MainActivity for onActivityResult()
-//                } catch (ActivityNotFoundException e) {
-//                    main_activity.showToast("There doesn't seem to be a camera.");
-//                }
+                Intent intent = new Intent();
+                // Picture from camera
+                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                // This is not the right way to do this, but for some reason, having
+                // it store it in
+                // MediaStore.Images.Media.EXTERNAL_CONTENT_URI isn't working right.
+
+                Date date = new Date();
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd-kk-mm-ss", Locale.US);
+
+                String current_city = main_activity.location_utility.get_current_city();
+
+                String newPicFile;
+
+                if (!current_city.equalsIgnoreCase("n/a")) {
+
+                    newPicFile = current_city + "_" + df.format(date) + ".jpg";
+
+                }
+
+                else {
+                    newPicFile = df.format(date) + ".jpg";
+                }
+
+                String outPath = new File(Environment.getExternalStorageDirectory(), newPicFile).getPath();
+                File outFile = new File(outPath);
+
+                mCameraFileName = outFile.toString();
+                Uri outuri = Uri.fromFile(outFile);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, outuri);
+                Log.i(tag, "Importing New Picture: " + mCameraFileName);
+                try {
+                    main_activity.startActivityForResult(intent, NEW_PICTURE); // See MainActivity for onActivityResult()
+                } catch (ActivityNotFoundException e) {
+                    main_activity.showToast("There doesn't seem to be a camera.");
+                }
+
+                break;
+
+            case R.id.button_map_back:
+                Log.i(tag, "Map Back Button Pushed");
+
+                main_activity.map_handler.kill_map();
+
+                break;
+
+            case R.id.button_show_map:
+                Log.i(tag, "Show Map Button Pushed");
+
+                main_activity.map_handler.add_map();
 
                 break;
 
@@ -178,6 +192,7 @@ public class Button_Handler implements View.OnClickListener {
         main_activity.findViewById(R.id.imageView_globe).setVisibility(View.VISIBLE);
         main_activity.findViewById(R.id.textView_latitude).setVisibility(View.GONE);
         main_activity.findViewById(R.id.textView_longitude).setVisibility(View.GONE);
+        main_activity.findViewById(R.id.button_show_map).setVisibility(View.VISIBLE);
         main_activity.refresh_handler.set_swipe_to_refresh_enabled(true);
     }
 

@@ -1,10 +1,7 @@
 package com.andrewkingmarshall.mobiquitycodechallenge;
 
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.Location;
-import android.location.LocationManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +11,7 @@ import android.widget.Toast;
 import com.andrewkingmarshall.mobiquitycodechallenge.UI_Handlers.Button_Handler;
 import com.andrewkingmarshall.mobiquitycodechallenge.UI_Handlers.ImageView_Handler;
 import com.andrewkingmarshall.mobiquitycodechallenge.UI_Handlers.ListView_Handler;
+import com.andrewkingmarshall.mobiquitycodechallenge.UI_Handlers.Map_Handler;
 import com.andrewkingmarshall.mobiquitycodechallenge.UI_Handlers.Swipe_to_Refresh_Handler;
 import com.andrewkingmarshall.mobiquitycodechallenge.Utilities.Data_Utility;
 import com.andrewkingmarshall.mobiquitycodechallenge.Utilities.Location_Utility;
@@ -21,12 +19,6 @@ import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 
 /**
@@ -40,7 +32,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
  * This class hanldes all the logic in the Main Activity.
  *
  */
-public class MainActivity extends ActionBarActivity implements OnMapReadyCallback {
+public class MainActivity extends ActionBarActivity {
 
     /** Used for LogCat Tags */
     public final String tag = "general_LogCat_tag";
@@ -75,8 +67,8 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
     /** Used to store coordinate data */
     public Data_Utility data_utility;
 
-    /** The Map Fragment */
-    MapFragment map_fragment;
+    /** Used to display the Google map */
+    public Map_Handler map_handler;
 
     /** Used to indicate if we are linked to a Dropbox account */
     private boolean logged_in;
@@ -110,14 +102,8 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
         // Set up the Data Utility
         data_utility = new Data_Utility(this, this);
 
-        findViewById(R.id.map).setVisibility(View.VISIBLE);
-        map_fragment = MapFragment.newInstance();
-        FragmentTransaction fragmentTransaction =
-                getFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.map, map_fragment);
-        fragmentTransaction.commit();
-
-        map_fragment.getMapAsync(this);
+        // Set up the Map Handler
+        map_handler = new Map_Handler(this, this);
 
 //        // Get a handle to the map fragment
 //        map_fragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
@@ -153,30 +139,12 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
                 Log.e(tag, "Error authenticating", e);
             }
         }
+
+        // Fixes an edge case when the map was up and you reenter the app.
+        if (findViewById(R.id.map).getVisibility() == View.VISIBLE) {
+            map_handler.kill_map();
+        }
     }
-
-    public void onMapReady(GoogleMap map_in) {
-
-        Location loc = new Location(LocationManager.GPS_PROVIDER);
-        loc.setLatitude(29.648591);
-        loc.setLongitude(-82.331251);
-
-        map_in.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(loc.getLatitude(), loc.getLongitude()), 14.0f));
-
-        map_in.addMarker(new MarkerOptions()
-                .position(new LatLng(29.648591, -82.331251))
-                .title("Mobiquity"));
-
-    }
-
-    public void kill_map() {
-
-        getFragmentManager().beginTransaction().remove(map_fragment).commit();
-
-        findViewById(R.id.map).setVisibility(View.GONE);
-
-    }
-
 
     /**
      * This is what gets called on finishing a media piece to import.
@@ -304,6 +272,7 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
             refresh_handler.set_swipe_to_refresh_enabled(true);
             listView_handler.refresh_listView();
             findViewById(R.id.button_camera).setVisibility(View.VISIBLE);
+            findViewById(R.id.button_show_map).setVisibility(View.VISIBLE);
         }
 
         else {
@@ -311,6 +280,7 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
             refresh_handler.stop_refreshing();
             refresh_handler.set_swipe_to_refresh_enabled(false);
             listView_handler.remove_all_items();
+            findViewById(R.id.button_show_map).setVisibility(View.GONE);
             findViewById(R.id.button_camera).setVisibility(View.GONE);
         }
     }
@@ -324,6 +294,10 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
 
         if (findViewById(R.id.imageView_main_canvas).getVisibility() == View.VISIBLE) {
             button_handler.go_back_from_image_view();
+        }
+
+        else if (findViewById(R.id.map).getVisibility() == View.VISIBLE) {
+            map_handler.kill_map();
         }
 
         else {
