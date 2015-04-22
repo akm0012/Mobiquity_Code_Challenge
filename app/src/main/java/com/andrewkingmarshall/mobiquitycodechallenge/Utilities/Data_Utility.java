@@ -1,6 +1,7 @@
 package com.andrewkingmarshall.mobiquitycodechallenge.Utilities;
 
 import android.content.Context;
+import android.graphics.AvoidXfermode;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -8,6 +9,12 @@ import android.widget.TextView;
 import com.andrewkingmarshall.mobiquitycodechallenge.MainActivity;
 import com.andrewkingmarshall.mobiquitycodechallenge.R;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -62,9 +69,64 @@ public class Data_Utility {
 
         hash_map = new HashMap();
 
+        // Check to see if there is a HashMap file saved, if so we restore it
+
+        File file = new File(main_activity.getDir("data", MainActivity.MODE_PRIVATE) , "map");
+        if(file.exists()) {
+            Log.d(tag, "A HashMap File Exists");
+
+            ObjectInputStream inputStream = null;
+            try {
+                inputStream = new ObjectInputStream(new FileInputStream(file));
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.e(tag, "File reading failed: " + e.getLocalizedMessage());
+            }
+
+            try {
+                Log.d(tag, "Getting saved Hash Map");
+                hash_map = (HashMap)inputStream.readObject();
+                inputStream.close();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
         //TODO Load exsisting HashMap data
 
     }
+
+    public void save_data() {
+
+        if (hash_map != null) {
+            File file = new File(main_activity.getDir("data", MainActivity.MODE_PRIVATE), "map");
+            ObjectOutputStream outputStream = null;
+            try {
+                outputStream = new ObjectOutputStream(new FileOutputStream(file));
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.e(tag, "File writing failed(2): " + e.getLocalizedMessage());
+            }
+            try {
+                outputStream.writeObject(hash_map);
+                outputStream.flush();
+                outputStream.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.e(tag, "File writing failed: " + e.getLocalizedMessage());
+            }
+        }
+
+
+
+
+    }
+
 
     /**
      * Puts an entry into the Data Utility.
@@ -145,6 +207,8 @@ public class Data_Utility {
 
             }
         }
+
+        save_data();
 
         return changed;
     }
