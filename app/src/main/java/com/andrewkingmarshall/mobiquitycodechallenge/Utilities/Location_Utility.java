@@ -88,7 +88,7 @@ public class Location_Utility implements LocationListener, GpsStatus.Listener{
      *
      * Currently just being used for LogCat.
      *
-     * @param event THe GPS Status event.
+     * @param event The GPS Status event.
      */
     public void onGpsStatusChanged(int event) {
 
@@ -143,7 +143,6 @@ public class Location_Utility implements LocationListener, GpsStatus.Listener{
         }
 
     }
-
 
     /**
      * Gets the live latitude if possible.
@@ -242,8 +241,6 @@ public class Location_Utility implements LocationListener, GpsStatus.Listener{
             else {
                 return "n/a";
             }
-
-
         }
 
         Geocoder geocoder = new Geocoder(main_activity_context, Locale.getDefault());
@@ -267,11 +264,17 @@ public class Location_Utility implements LocationListener, GpsStatus.Listener{
 
     }
 
+    /**
+     * Called when Location is turned on by the user.
+     */
     public void onProviderEnabled(String provider) {
         Log.i(tag, "Provider Enabled");
         main_activity.imageView_handler.change_globe_red();
     }
 
+    /**
+     * Called when Location is turned off by the user.
+     */
     public void onProviderDisabled(String provider) {
         Log.i(tag, "Provider disabled");
         main_activity.imageView_handler.change_globe_grey();

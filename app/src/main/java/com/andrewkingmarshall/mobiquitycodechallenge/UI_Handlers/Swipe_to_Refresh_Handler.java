@@ -7,7 +7,7 @@ import com.andrewkingmarshall.mobiquitycodechallenge.MainActivity;
 import com.andrewkingmarshall.mobiquitycodechallenge.R;
 
 /**
- * Button_Handler.java
+ * Swipe_to_Refresh_Handler.java
  *
  * @author         :: Andrew K Marshall
  * Created On      :: 4/20/15
@@ -41,7 +41,6 @@ public class Swipe_to_Refresh_Handler implements SwipeRefreshLayout.OnRefreshLis
         main_activity_context = context_in;
 
         set_up_layout();
-
     }
 
     /**
@@ -58,7 +57,6 @@ public class Swipe_to_Refresh_Handler implements SwipeRefreshLayout.OnRefreshLis
         // Set the icon's color scheme
         swipe_refresh_layout.setColorSchemeResources(R.color.green,
                 R.color.blue, R.color.orange);
-
     }
 
     /**

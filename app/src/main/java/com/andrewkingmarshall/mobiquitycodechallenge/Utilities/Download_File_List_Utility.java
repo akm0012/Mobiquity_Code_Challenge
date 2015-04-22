@@ -22,7 +22,6 @@ import com.dropbox.client2.exception.DropboxUnlinkedException;
 
 import java.util.ArrayList;
 
-
 /**
  * Download_File_List_Utility.java
  *

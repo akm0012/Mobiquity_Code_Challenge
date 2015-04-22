@@ -24,8 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|top"
-                android:text="Link to Dropbox" />
-
+                android:text="@string/button_dropbox_link" />
 
             <ListView
                 android:id="@+id/listView_dropbox_files"
@@ -38,6 +37,7 @@
                 android:id="@+id/imageView_main_canvas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/cd_main_image"
                 android:visibility="gone" />
 
             <TextView
@@ -54,13 +54,12 @@
                 android:layout_gravity="center_horizontal"
                 android:visibility="gone" />
 
-
             <Button
                 android:id="@+id/button_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|bottom"
-                android:text="Back"
+                android:text="@string/button_back"
                 android:visibility="gone" />
 
             <Button
@@ -68,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|bottom"
-                android:text="Back"
+                android:text="@string/button_back"
                 android:visibility="gone" />
 
             <Button
@@ -76,17 +75,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|bottom"
-                android:text="Show Map"
-                android:visibility="visible" />
+                android:text="@string/button_show_map"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/button_camera"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|bottom"
-                android:text="Take Photo"
-                android:visibility="visible" />
-
+                android:text="@string/button_take_photo"
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -96,7 +94,7 @@
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:contentDescription="globe"
+            android:contentDescription="@string/cd_globe"
             android:clickable="true"
             android:src="@drawable/red_globe" />
 
@@ -106,7 +104,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="70dp">
-
 
         </FrameLayout>
 

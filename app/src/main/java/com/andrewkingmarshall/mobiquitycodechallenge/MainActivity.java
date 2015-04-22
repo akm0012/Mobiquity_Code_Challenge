@@ -20,7 +20,6 @@ import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
 
-
 /**
  * MainActivity.java
  *
@@ -73,6 +72,11 @@ public class MainActivity extends ActionBarActivity {
     /** Used to indicate if we are linked to a Dropbox account */
     private boolean logged_in;
 
+    /**
+     * Life cycle method.
+     *
+     * Called every time the App is created.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,19 +109,22 @@ public class MainActivity extends ActionBarActivity {
         // Set up the Map Handler
         map_handler = new Map_Handler(this, this);
 
-//        // Get a handle to the map fragment
-//        map_fragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
-//
-//        // Add the listener
-//        map_fragment.getMapAsync(this);
-
-        // Set the UI according to if we are logged in or not.
         set_logged_in(mApi.getSession().isLinked());
     }
 
+    /**
+     * Life cycle method.
+     *
+     * Called every time the App resumes.
+     */
     public void onResume() {
         super.onResume();
         Log.i(tag, "MainActivity.onResume()");
+
+        // Fixes an edge case when the map was up and you reenter the app.
+        if (findViewById(R.id.map).getVisibility() == View.VISIBLE) {
+            map_handler.kill_map();
+        }
 
         AndroidAuthSession session = mApi.getSession();
 
@@ -133,16 +140,14 @@ public class MainActivity extends ActionBarActivity {
                 storeAuth(session);
                 set_logged_in(true);
 
-                logged_in = true;
             } catch (IllegalStateException e) {
                 showToast("Couldn't authenticate with Dropbox:" + e.getLocalizedMessage());
                 Log.e(tag, "Error authenticating", e);
             }
         }
 
-        // Fixes an edge case when the map was up and you reenter the app.
-        if (findViewById(R.id.map).getVisibility() == View.VISIBLE) {
-            map_handler.kill_map();
+        else {
+            logOut();
         }
     }
 
@@ -173,7 +178,6 @@ public class MainActivity extends ActionBarActivity {
         clearKeys();
         // Change UI state to display logged out version
         set_logged_in(false);
-        logged_in = false;
     }
 
     /**
@@ -222,7 +226,6 @@ public class MainActivity extends ActionBarActivity {
             edit.putString(ACCESS_KEY_NAME, oauth1AccessToken.key);
             edit.putString(ACCESS_SECRET_NAME, oauth1AccessToken.secret);
             edit.commit();
-            return;
         }
     }
 
@@ -268,7 +271,8 @@ public class MainActivity extends ActionBarActivity {
         this.logged_in = logged_in;
 
         if (logged_in) {
-            button_handler.set_button_text(R.id.button_dropbox_link, "Unlink Dropbox"); //TODO String Resource
+            button_handler.set_button_text(R.id.button_dropbox_link,
+                    getString(R.string.button_dropbox_unlink));
             refresh_handler.set_swipe_to_refresh_enabled(true);
             listView_handler.refresh_listView();
             findViewById(R.id.button_camera).setVisibility(View.VISIBLE);
@@ -276,7 +280,8 @@ public class MainActivity extends ActionBarActivity {
         }
 
         else {
-            button_handler.set_button_text(R.id.button_dropbox_link, "Link to Dropbox"); //TODO String Resource
+            button_handler.set_button_text(R.id.button_dropbox_link,
+                    getString(R.string.button_dropbox_link));
             refresh_handler.stop_refreshing();
             refresh_handler.set_swipe_to_refresh_enabled(false);
             listView_handler.remove_all_items();
@@ -303,7 +308,6 @@ public class MainActivity extends ActionBarActivity {
         else {
             super.onBackPressed();
         }
-
     }
 
     /**
@@ -344,6 +348,5 @@ public class MainActivity extends ActionBarActivity {
         super.onDestroy();
         Log.i(tag, "MainActivity.onDestroy()");
     }
-
 
 }

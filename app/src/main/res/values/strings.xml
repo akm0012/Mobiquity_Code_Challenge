@@ -3,4 +3,16 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Button Strings -->
+    <string name="button_dropbox_link">Link to Dropbox</string>
+    <string name="button_dropbox_unlink">Unlink Dropbox</string>
+    <string name="button_back">Back</string>
+    <string name="button_show_map">Show Map</string>
+    <string name="button_take_photo">Take Photo</string>
+
+    <!-- Content Descriptions -->
+    <string name="cd_main_image">Downloaded Image</string>
+    <string name="cd_globe">Globe</string>
+
 </resources>

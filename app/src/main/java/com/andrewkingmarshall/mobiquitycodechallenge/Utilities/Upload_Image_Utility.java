@@ -70,7 +70,6 @@ public class Upload_Image_Utility extends AsyncTask<Void, Long, Boolean> {
     /** The Longitude of the picture we are uploading */
     private double longitude;
 
-
     /**
      * Creates an Upload Image Utility.
      *
@@ -203,6 +202,7 @@ public class Upload_Image_Utility extends AsyncTask<Void, Long, Boolean> {
             // Unknown error
             mErrorMsg = "Unknown error.  Try again.";
         } catch (FileNotFoundException e) {
+            mErrorMsg = "File not found.  Try again.";
         }
         return false;
     }

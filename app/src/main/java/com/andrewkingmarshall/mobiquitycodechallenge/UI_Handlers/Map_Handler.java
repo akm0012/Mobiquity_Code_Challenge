@@ -53,9 +53,7 @@ public class Map_Handler implements OnMapReadyCallback {
 
         main_activity = activity_in;
         main_activity_context = context_in;
-
     }
-
 
     /**
      * Adds the map and displays it.
@@ -71,7 +69,6 @@ public class Map_Handler implements OnMapReadyCallback {
         // These need to go away so we don't accidentally push them and cause problems
         main_activity.findViewById(R.id.button_dropbox_link).setVisibility(View.GONE);
         main_activity.findViewById(R.id.listView_dropbox_files).setVisibility(View.INVISIBLE);
-
 
         map_fragment = MapFragment.newInstance();
 
@@ -139,10 +136,7 @@ public class Map_Handler implements OnMapReadyCallback {
             else {
                 Log.w(tag, "Invalid point skipped.");
             }
-
-
         }
-
     }
 
     /**

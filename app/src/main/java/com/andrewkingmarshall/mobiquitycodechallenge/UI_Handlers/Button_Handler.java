@@ -66,7 +66,6 @@ public class Button_Handler implements View.OnClickListener {
         main_activity_context = context_in;
 
         set_up_buttons();
-
     }
 
     /**
@@ -223,7 +222,7 @@ public class Button_Handler implements View.OnClickListener {
 
                 if (uri != null && file != null) {
 
-                    // TODO - Testing
+                    // Just here for testing purposes
                     Log.d(tag, "" + ReadExif(file.getAbsolutePath()));
 
                     Upload_Image_Utility upload = new Upload_Image_Utility(main_activity, main_activity_context,
@@ -295,7 +294,4 @@ public class Button_Handler implements View.OnClickListener {
         ((Button) main_activity.findViewById(button_id)).setText("" + text);
 
     }
-
-
-
 }

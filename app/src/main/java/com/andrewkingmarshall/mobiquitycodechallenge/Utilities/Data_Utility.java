@@ -56,7 +56,6 @@ public class Data_Utility {
         main_activity_context = context_in;
 
         init();
-
     }
 
     /**
@@ -105,6 +104,9 @@ public class Data_Utility {
         }
     }
 
+    /**
+     * Saves the Hash Map into internal storage.
+     */
     public void save_data() {
 
         if (hash_map != null) {
@@ -126,12 +128,7 @@ public class Data_Utility {
                 Log.e(tag, "File writing failed: " + e.getLocalizedMessage());
             }
         }
-
-
-
-
     }
-
 
     /**
      * Puts an entry into the Data Utility.
@@ -166,7 +163,6 @@ public class Data_Utility {
 
         return false;
     }
-
 
     /**
      * Goes through our Data Utility and removes any entry's that no longer are valid.
@@ -264,11 +260,8 @@ public class Data_Utility {
                 // Longitude
                 main_activity.findViewById(R.id.textView_longitude).setVisibility(View.VISIBLE);
                 ((TextView)main_activity.findViewById(R.id.textView_longitude)).setText("Longitude: " + temp[1]);
-
             }
-
         }
-
     }
 
     /**
@@ -279,6 +272,5 @@ public class Data_Utility {
     public HashMap get_hash_map() {
         return this.hash_map;
     }
-
 
 }
